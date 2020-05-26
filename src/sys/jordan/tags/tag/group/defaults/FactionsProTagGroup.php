@@ -31,7 +31,7 @@ class FactionsProTagGroup extends PluginTagGroup {
 			new ExternalPluginTag("faction", $this->getExternalPlugin(), function (Player $player, Plugin $plugin): string {
 				return $plugin->getPlayerFaction($player) ?? "None";
 			}),
-			new ExternalPluginTag("fpower", $this->getExternalPlugin(), function (Player $player, Plugin $plugin): string {
+			new ExternalPluginTag("f_power", $this->getExternalPlugin(), function (Player $player, Plugin $plugin): string {
 				return (string) $plugin->getFactionPower($plugin->getPlayerFaction($player)) ?? "";
 			})
 		];

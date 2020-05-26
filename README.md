@@ -1,10 +1,10 @@
 # Player Tags
 
-Show a tag below the player's nametag!
+Show a tag below the player's name tag!
 
 ## How to Install?
 
-* Download the plugin from Poggit (Linked above)
+* Download the plugin from the [releases](https://github.com/sylvrs/PlayerTags/releases)
 * Install the plugin in your server's 'plugins' folder.
 * Restart your server.
 * Enjoy!
@@ -14,7 +14,6 @@ Show a tag below the player's nametag!
 ### Formatting
 
 * {line} - Creates another line.
-* & - This character can be used to replace the color format character (§)
 
 ### Default
 
