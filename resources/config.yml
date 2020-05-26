@@ -1,0 +1,12 @@
+---
+##
+# For a list of supported tags, visit https://github.com/sylvrs/PlayerTags
+##
+
+# The tag displayed below the player's name tag
+tag: ""
+# The character used to replace Minecraft's color character (§)
+color-character: "&"
+# How often to update the score tags (in ticks)
+update-period: 10
+...
