@@ -11,6 +11,7 @@ use sys\jordan\tags\tag\group\defaults\CombatLoggerTagGroup;
 use sys\jordan\tags\tag\group\defaults\DefaultTagGroup;
 use sys\jordan\tags\tag\group\defaults\EconomyAPITagGroup;
 use sys\jordan\tags\tag\group\defaults\FactionsProTagGroup;
+use sys\jordan\tags\tag\group\defaults\KDRTagGroup;
 use sys\jordan\tags\tag\group\defaults\PiggyFactionsTagGroup;
 use sys\jordan\tags\tag\group\defaults\PurePermsTagGroup;
 use sys\jordan\tags\tag\group\defaults\RankUpTagGroup;
@@ -91,6 +92,7 @@ class TagFactory {
 		$this->registerGroup(new DefaultTagGroup($this->getPlugin()));
 		$this->registerGroup(new EconomyAPITagGroup($this->getPlugin()));
 		$this->registerGroup(new FactionsProTagGroup($this->getPlugin()));
+		$this->registerGroup(new KDRTagGroup($this->getPlugin()));
 		$this->registerGroup(new PiggyFactionsTagGroup($this->getPlugin()));
 		$this->registerGroup(new PurePermsTagGroup($this->getPlugin()));
 		$this->registerGroup(new RankUpTagGroup($this->getPlugin()));

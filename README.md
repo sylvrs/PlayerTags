@@ -48,6 +48,12 @@ Show a tag below the player's name tag!
 * {faction_name} - The name of the player's current faction ('None', if not in one)
 * {faction_power} - The faction's current power level ('', if not in one)
 
+### KDR
+
+* {kills} - The number of kill points for the player
+* {deaths} - The number of death points for the player
+* {kdr} - The kill/death ratio for the player
+
 ### PiggyFactions
 
 * {faction_name} - The name of the player's current faction ('None', if not in one)
