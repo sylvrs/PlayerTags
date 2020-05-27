@@ -10,7 +10,6 @@ use sys\jordan\tags\tag\group\TagGroup;
 use sys\jordan\tags\tag\Tag;
 use sys\jordan\tags\tag\TagFactory;
 use pocketmine\Player;
-use function floor;
 use function round;
 use function str_repeat;
 use function substr_replace;
