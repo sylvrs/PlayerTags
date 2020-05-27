@@ -7,6 +7,7 @@ namespace sys\jordan\tags\tag;
 use Exception;
 use pocketmine\scheduler\ClosureTask;
 use sys\jordan\tags\PlayerTagsBase;
+use sys\jordan\tags\tag\group\defaults\AdvancedJobsTagGroup;
 use sys\jordan\tags\tag\group\defaults\CombatLoggerTagGroup;
 use sys\jordan\tags\tag\group\defaults\DefaultTagGroup;
 use sys\jordan\tags\tag\group\defaults\EconomyAPITagGroup;
@@ -16,6 +17,7 @@ use sys\jordan\tags\tag\group\defaults\PiggyFactionsTagGroup;
 use sys\jordan\tags\tag\group\defaults\PurePermsTagGroup;
 use sys\jordan\tags\tag\group\defaults\RankUpTagGroup;
 use sys\jordan\tags\tag\group\defaults\RedSkyBlockTagGroup;
+use sys\jordan\tags\tag\group\defaults\SkyBlockTagGroup;
 use sys\jordan\tags\tag\group\TagGroup;
 use sys\jordan\tags\utils\PlayerTagsBaseTrait;
 use pocketmine\Player;
@@ -88,6 +90,7 @@ class TagFactory {
 	}
 
 	public function registerTags(): void {
+		$this->registerGroup(new AdvancedJobsTagGroup($this->getPlugin()));
 		$this->registerGroup(new CombatLoggerTagGroup($this->getPlugin()));
 		$this->registerGroup(new DefaultTagGroup($this->getPlugin()));
 		$this->registerGroup(new EconomyAPITagGroup($this->getPlugin()));
@@ -97,6 +100,7 @@ class TagFactory {
 		$this->registerGroup(new PurePermsTagGroup($this->getPlugin()));
 		$this->registerGroup(new RankUpTagGroup($this->getPlugin()));
 		$this->registerGroup(new RedSkyBlockTagGroup($this->getPlugin()));
+		$this->registerGroup(new SkyBlockTagGroup($this->getPlugin()));
 		$count = count($this->getTags());
 		$this->getPlugin()->getLogger()->info(TextFormat::YELLOW . "Successfully loaded $count tags!");
 	}

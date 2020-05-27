@@ -6,6 +6,7 @@ namespace sys\jordan\tags\session;
 
 
 use pocketmine\Player;
+use pocketmine\utils\TextFormat;
 use pocketmine\utils\UUID;
 use sys\jordan\tags\PlayerTagsBase;
 use sys\jordan\tags\utils\PlayerTagsBaseTrait;
@@ -24,6 +25,18 @@ class SessionManager {
 	 */
 	public function __construct(PlayerTagsBase $plugin) {
 		$this->setPlugin($plugin);
+	}
+
+	/**
+	 * In the case of a reload, kick the players to ensure valid sessions
+	 */
+	public function onEnable(): void {
+		$players = $this->getPlugin()->getServer()->getOnlinePlayers();
+		if(count($players) > 0) {
+			foreach($players as $player) {
+				$player->kick("Invalid session detected. Please join back to validate your session!", false);
+			}
+		}
 	}
 
 	/**

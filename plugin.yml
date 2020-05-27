@@ -1,10 +1,11 @@
 name: PlayerTags
-version: 1.0.4
+version: 1.0.5
 main: sys\jordan\tags\PlayerTagsBase
 api:
   - 3.0.0
 author: sylvrs
 softdepend:
+  - AdvancedJobs
   - CombatLogger
   - EconomyAPI
   - FactionsPro
@@ -13,3 +14,4 @@ softdepend:
   - PurePerms
   - RankUp
   - RedSkyBlock
+  - SkyBlock

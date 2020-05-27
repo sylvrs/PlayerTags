@@ -26,6 +26,7 @@ class PlayerTagsBase extends PluginBase implements Listener {
 
 	public function onEnable(): void {
 		$this->getTagFactory()->enable();
+		$this->getSessionManager()->onEnable();
 		new PlayerTagsListener($this);
 		$this->getLogger()->info(TextFormat::GREEN . "{$this->getDescription()->getFullName()} has been enabled successfully!");
 	}
