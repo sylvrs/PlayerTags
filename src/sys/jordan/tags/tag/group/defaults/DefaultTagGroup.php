@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace sys\jordan\tags\tag\group\defaults;
 
 
+use pocketmine\command\defaults\GamemodeCommand;
+use pocketmine\Server;
 use pocketmine\utils\TextFormat;
 use sys\jordan\tags\tag\group\TagGroup;
 use sys\jordan\tags\tag\Tag;
@@ -45,6 +47,12 @@ class DefaultTagGroup extends TagGroup {
 			}),
 			new Tag("itemName", function (Player $player): string {
 				return $player->getInventory()->getItemInHand()->getName();
+			}),
+			new Tag("ip", function (Player $player): string {
+				return $player->getAddress();
+			}),
+			new Tag("gamemode", function (Player $player): string {
+				return Server::getGamemodeName($player->getGamemode());
 			}),
 			new Tag("ping", function (Player $player): string {
 				return (string) $player->getPing();

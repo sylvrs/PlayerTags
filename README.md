@@ -23,6 +23,8 @@ Show a tag below the player's name tag!
 * {itemDamage} - The damage of the item in the player's hand
 * {itemCount} - The amount of the item in the player's hand
 * {itemName} - The name of the item in the player's hand
+* {ip} - The player's IP address
+* {gamemode} - The player's gamemode
 * {ping} - The player's current ping
 * {cps} - The player's current CPS
 * {health} - The player's current health
