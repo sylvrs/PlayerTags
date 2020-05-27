@@ -21,6 +21,7 @@ Show a tag below the player's name tag!
 * {level} - The player's current level
 * {itemId} - The ID of the item in the player's hand
 * {itemDamage} - The damage of the item in the player's hand
+* {itemCount} - The amount of the item in the player's hand
 * {itemName} - The name of the item in the player's hand
 * {ping} - The player's current ping
 * {cps} - The player's current CPS

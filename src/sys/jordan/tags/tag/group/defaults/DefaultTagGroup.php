@@ -41,6 +41,9 @@ class DefaultTagGroup extends TagGroup {
 			new Tag("itemDamage", function (Player $player): string {
 				return (string) $player->getInventory()->getItemInHand()->getDamage();
 			}),
+			new Tag("itemCount", function (Player $player): string {
+				return (string) $player->getInventory()->getItemInHand()->getCount();
+			}),
 			new Tag("itemName", function (Player $player): string {
 				return $player->getInventory()->getItemInHand()->getName();
 			}),
