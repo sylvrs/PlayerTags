@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace sys\jordan\tags\tag\group\defaults;
 
 
-use pocketmine\command\defaults\GamemodeCommand;
 use pocketmine\Server;
 use pocketmine\utils\TextFormat;
 use sys\jordan\tags\tag\group\TagGroup;
@@ -36,16 +35,16 @@ class DefaultTagGroup extends TagGroup {
 			new Tag("level", function (Player $player): string {
 				return $player->isValid() ? $player->getLevel()->getName() : "unknown";
 			}),
-			new Tag("itemId", function (Player $player): string {
+			new Tag("item_id", function (Player $player): string {
 				return (string) $player->getInventory()->getItemInHand()->getId();
 			}),
-			new Tag("itemDamage", function (Player $player): string {
+			new Tag("item_damage", function (Player $player): string {
 				return (string) $player->getInventory()->getItemInHand()->getDamage();
 			}),
-			new Tag("itemCount", function (Player $player): string {
+			new Tag("item_count", function (Player $player): string {
 				return (string) $player->getInventory()->getItemInHand()->getCount();
 			}),
-			new Tag("itemName", function (Player $player): string {
+			new Tag("item_name", function (Player $player): string {
 				return $player->getInventory()->getItemInHand()->getName();
 			}),
 			new Tag("ip", function (Player $player): string {

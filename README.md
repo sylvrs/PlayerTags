@@ -2,7 +2,7 @@
 
 Show a tag below the player's name tag!
 
-## How to Install?
+## Installation
 
 * Download the latest release from [releases](https://github.com/sylvrs/PlayerTags/releases)
 * Install the plugin in your server's 'plugins' folder.
