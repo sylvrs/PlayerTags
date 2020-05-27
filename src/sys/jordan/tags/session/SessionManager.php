@@ -48,18 +48,18 @@ class SessionManager {
 	}
 
 	/**
+	 * @param Player $player
+	 * @return PlayerSession|null
+	 */
+	public function find(Player $player): ?PlayerSession {
+		return $this->sessions[$player->getUniqueId()->toString()] ?? null;
+	}
+
+	/**
 	 * @return PlayerSession[]
 	 */
 	public function getSessions(): array {
 		return $this->sessions;
-	}
-
-	/**
-	 * @param Player $player
-	 * @return PlayerSession|null
-	 */
-	public function findSession(Player $player): ?PlayerSession {
-		return $this->sessions[$player->getUniqueId()->toString()] ?? null;
 	}
 
 	public function clear(): void {

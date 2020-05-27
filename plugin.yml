@@ -1,5 +1,5 @@
 name: PlayerTags
-version: 1.0.0
+version: 1.0.1
 main: sys\jordan\tags\PlayerTagsBase
 api:
   - 3.0.0

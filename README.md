@@ -22,7 +22,6 @@ Show a tag below the player's name tag!
 * {itemId} - The ID of the item in the player's hand
 * {itemDamage} - The damage of the item in the player's hand
 * {itemName} - The name of the item in the player's hand
-* {usage} - The server's tick usage
 * {ping} - The player's current ping
 * {cps} - The player's current CPS
 * {health} - The player's current health
@@ -42,8 +41,8 @@ Show a tag below the player's name tag!
 
 ### FactionsPro
 
-* {faction} - The name of the player's current faction ('None', if not in one)
-* {f_power} - The faction's current power level ('', if not in one)
+* {faction_name} - The name of the player's current faction ('None', if not in one)
+* {faction_power} - The faction's current power level ('', if not in one)
 
 ### PiggyFactions
 

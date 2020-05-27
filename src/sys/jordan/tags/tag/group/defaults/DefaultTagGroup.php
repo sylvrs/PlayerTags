@@ -40,14 +40,11 @@ class DefaultTagGroup extends TagGroup {
 			new Tag("itemName", function (Player $player): string {
 				return $player->getInventory()->getItemInHand()->getName();
 			}),
-			new Tag("usage", function (Player $player): string {
-				return (string) $this->getPlugin()->getServer()->getTickUsage();
-			}),
 			new Tag("ping", function (Player $player): string {
 				return (string) $player->getPing();
 			}),
 			new Tag("cps", function (Player $player): string {
-				return (string) $this->getPlugin()->getSessionManager()->findSession($player)->getClicksPerSecond();
+				return (string) $this->getPlugin()->getSessionManager()->find($player)->getClicksPerSecond();
 			}),
 			new Tag("health", function (Player $player): string {
 				return (string) round($player->getHealth(), 2);
@@ -56,13 +53,13 @@ class DefaultTagGroup extends TagGroup {
 				return (string) $player->getMaxHealth();
 			}),
 			new Tag("device", function (Player $player): string {
-				return $this->getPlugin()->getSessionManager()->findSession($player)->getDevice();
+				return $this->getPlugin()->getSessionManager()->find($player)->getDevice();
 			}),
 			new Tag("input_mode", function (Player $player): string{
-				return $this->getPlugin()->getSessionManager()->findSession($player)->getInputModeString();
+				return $this->getPlugin()->getSessionManager()->find($player)->getInputModeString();
 			}),
 			new Tag("os", function (Player $player): string {
-				return $this->getPlugin()->getSessionManager()->findSession($player)->getOSString();
+				return $this->getPlugin()->getSessionManager()->find($player)->getOSString();
 			})
 		];
 	}

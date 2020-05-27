@@ -38,7 +38,7 @@ class PlayerTagsListener implements Listener {
 	 */
 	public function handlePlayerPreLogin(PlayerPreLoginEvent $event): void {
 		$player = $event->getPlayer();
-		$session = $this->getPlugin()->getSessionManager()->findSession($player);
+		$session = $this->getPlugin()->getSessionManager()->find($player);
 		if($session instanceof PlayerSession) {
 			$session->setPlayer($event->getPlayer());
 			$session->start($this->getPlugin());
@@ -65,15 +65,15 @@ class PlayerTagsListener implements Listener {
 			$session = $this->getPlugin()->getSessionManager()->create(UUID::fromString($packet->clientUUID));
 			$session->setDevice($packet->clientData["DeviceModel"]);
 			$session->setInputMode($packet->clientData["CurrentInputMode"]);
-			$session->setOs($packet->clientData["DeviceOS"]);
+			$session->setOS($packet->clientData["DeviceOS"]);
 			$this->getPlugin()->getLogger()->debug("Creating player session");
 		} elseif($packet instanceof InventoryTransactionPacket) {
 			if($packet->transactionType === InventoryTransactionPacket::TYPE_USE_ITEM_ON_ENTITY) {
-				$this->getPlugin()->getSessionManager()->findSession($player)->addClick();
+				$this->getPlugin()->getSessionManager()->find($player)->addClick();
 			}
 		} elseif($packet instanceof LevelSoundEventPacket) {
 			if($packet->sound === LevelSoundEventPacket::SOUND_ATTACK_NODAMAGE) {
-				$this->getPlugin()->getSessionManager()->findSession($player)->addClick();
+				$this->getPlugin()->getSessionManager()->find($player)->addClick();
 			}
 		}
 	}

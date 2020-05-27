@@ -178,7 +178,7 @@ class PlayerSession {
 	/**
 	 * @param int $os
 	 */
-	public function setOs(int $os): void {
+	public function setOS(int $os): void {
 		$this->os = $os;
 	}
 

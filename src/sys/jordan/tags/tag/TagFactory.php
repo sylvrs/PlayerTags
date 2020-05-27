@@ -20,6 +20,7 @@ use sys\jordan\tags\utils\PlayerTagsBaseTrait;
 use pocketmine\Player;
 use pocketmine\utils\TextFormat;
 
+use function array_key_exists;
 use function count;
 use function str_ireplace;
 use function str_replace;
@@ -100,8 +101,13 @@ class TagFactory {
 
 	/**
 	 * @param Tag $tag
+	 * @param bool $force
 	 */
-	public function register(Tag $tag): void {
+	public function register(Tag $tag, bool $force = false): void {
+		if(array_key_exists($tag->getName(), $this->tags) && !$force) {
+			$this->getPlugin()->getLogger()->error(TextFormat::RED . "Attempted to register tag that's already been registered: {$tag->getName()}");
+			return;
+		}
 		$this->tags[$tag->getName()] = $tag;
 	}
 

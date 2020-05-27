@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace sys\jordan\tags\tag\group;
 
-
 use sys\jordan\tags\PlayerTagsBase;
 use sys\jordan\tags\tag\ExternalPluginTag;
 use sys\jordan\tags\tag\Tag;
@@ -70,4 +69,6 @@ abstract class PluginTagGroup extends TagGroup {
 	 * @return ExternalPluginTag[]
 	 */
 	abstract public function register(TagFactory $factory): array;
+
+
 }
