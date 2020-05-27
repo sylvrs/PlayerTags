@@ -5,11 +5,15 @@ declare(strict_types=1);
 namespace sys\jordan\tags\tag\group\defaults;
 
 
+use pocketmine\utils\TextFormat;
 use sys\jordan\tags\tag\group\TagGroup;
 use sys\jordan\tags\tag\Tag;
 use sys\jordan\tags\tag\TagFactory;
 use pocketmine\Player;
+use function floor;
 use function round;
+use function str_repeat;
+use function substr_replace;
 
 class DefaultTagGroup extends TagGroup {
 
@@ -51,6 +55,10 @@ class DefaultTagGroup extends TagGroup {
 			}),
 			new Tag("max_health", function (Player $player): string {
 				return (string) $player->getMaxHealth();
+			}),
+			new Tag("health_bar", function (Player $player): string {
+				$healthString = str_repeat("|", (int) $player->getMaxHealth());
+				return TextFormat::GREEN . ($player->getHealth() < $player->getMaxHealth() ? (substr_replace($healthString, TextFormat::RED, (int) $player->getHealth() - 1, 0)) : $healthString) . ($player->getAbsorption() > 0 ? TextFormat::GOLD . str_repeat("|", (int) $player->getAbsorption()) : "");
 			}),
 			new Tag("device", function (Player $player): string {
 				return $this->getPlugin()->getSessionManager()->find($player)->getDevice();

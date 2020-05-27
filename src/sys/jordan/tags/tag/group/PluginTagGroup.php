@@ -70,5 +70,4 @@ abstract class PluginTagGroup extends TagGroup {
 	 */
 	abstract public function register(TagFactory $factory): array;
 
-
 }

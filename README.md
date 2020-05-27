@@ -26,6 +26,7 @@ Show a tag below the player's name tag!
 * {cps} - The player's current CPS
 * {health} - The player's current health
 * {max_health} - The player's maximum health
+* {health_bar} - The player's health converted into a bar
 * {device} - The player's current device
 * {input_mode} - The player's current input mode (Touch, Controller, KB+M)
 * {os} - The player's current OS
