@@ -14,9 +14,6 @@ use pocketmine\utils\TextFormat;
 
 abstract class PluginTagGroup extends TagGroup {
 
-	/** @var string */
-	private $pluginName;
-
 	/** @var Plugin|null */
 	private $externalPlugin;
 
@@ -27,15 +24,7 @@ abstract class PluginTagGroup extends TagGroup {
 	 */
 	public function __construct(PlayerTagsBase $plugin, string $pluginName) {
 		parent::__construct($plugin);
-		$this->pluginName = $pluginName;
 		$this->externalPlugin = $plugin->getServer()->getPluginManager()->getPlugin($pluginName);
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getPluginName(): string {
-		return $this->pluginName;
 	}
 
 	/**
@@ -58,7 +47,7 @@ abstract class PluginTagGroup extends TagGroup {
 	 */
 	public function load(TagFactory $factory): array {
 		if($this->check()) {
-			$this->getPlugin()->getLogger()->info(TextFormat::GREEN . "{$this->getPluginName()} support has been enabled!");
+			$this->getPlugin()->getLogger()->info(TextFormat::GREEN . "{$this->getExternalPlugin()->getDescription()->getName()} support has been enabled!");
 			return $this->register($factory);
 		}
 		return [];
