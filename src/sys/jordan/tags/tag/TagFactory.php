@@ -36,9 +36,6 @@ class TagFactory {
 	/** @var Tag[] */
 	private $tags = [];
 
-	/** @var string[] */
-	private $worldTags = [];
-
 	/** @var string */
 	private $tag;
 
