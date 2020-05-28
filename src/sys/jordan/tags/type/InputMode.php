@@ -8,15 +8,15 @@ namespace sys\jordan\tags\type;
 final class InputMode {
 
 	/** @var int */
-	const KEYBOARD = 1;
+	public const KEYBOARD = 1;
 	/** @var int */
-	const TOUCH = 2;
+	public const TOUCH = 2;
 	/** @var int */
-	const CONTROLLER = 3;
+	public const CONTROLLER = 3;
 
 	/**
 	 * no-op
 	 */
-	public function __construct() {}
+	private function __construct() {}
 
 }

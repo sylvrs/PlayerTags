@@ -6,7 +6,6 @@ namespace sys\jordan\tags\tag\group\defaults;
 
 use pocketmine\Player;
 use pocketmine\plugin\Plugin;
-use room17\SkyBlock\island\Island;
 use room17\SkyBlock\island\RankIds;
 use sys\jordan\tags\PlayerTagsBase;
 use sys\jordan\tags\tag\ExternalPluginTag;
