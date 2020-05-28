@@ -36,6 +36,9 @@ class TagFactory {
 	/** @var Tag[] */
 	private $tags = [];
 
+	/** @var string[] */
+	private $worldTags = [];
+
 	/** @var string */
 	private $tag;
 
@@ -44,6 +47,9 @@ class TagFactory {
 
 	/** @var int */
 	private $updatePeriod;
+
+	/** @var MultiWorldTagManager */
+	private $tagManager;
 
 	/**
 	 * TagFactory constructor.
@@ -54,6 +60,7 @@ class TagFactory {
 		$this->tag = $plugin->getConfig()->get("tag", "");
 		$this->colorCharacter = $plugin->getConfig()->get("color-character", "&");
 		$this->updatePeriod = $plugin->getConfig()->get("update-period", 10);
+		$this->tagManager = new MultiWorldTagManager($this, $this->getPlugin()->getConfig());
 		$this->registerTags();
 	}
 
@@ -87,6 +94,13 @@ class TagFactory {
 	 */
 	public function getUpdatePeriod(): int {
 		return $this->updatePeriod;
+	}
+
+	/**
+	 * @return MultiWorldTagManager
+	 */
+	public function getTagManager(): MultiWorldTagManager {
+		return $this->tagManager;
 	}
 
 	public function registerTags(): void {
@@ -150,7 +164,7 @@ class TagFactory {
 		if(strlen($this->tag) <= 0) {
 			return "";
 		}
-		$output = $this->getTagString();
+		$output = $this->getTagManager()->getTagForLevel($player);
 		foreach($this->getTags() as $tag) {
 			try {
 				$tag->replace($player, $output);

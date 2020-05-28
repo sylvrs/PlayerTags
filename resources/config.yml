@@ -9,4 +9,11 @@ tag: ""
 color-character: "&"
 # How often to update the score tags (in ticks)
 update-period: 10
+# Multi-world support
+multi-world:
+  # Enabling this will override the tag listed above, unless the level they are in doesn't have a tag
+  enabled: false
+  worlds:
+    # This will be the tag in the level 'world'
+    world: ""
 ...
