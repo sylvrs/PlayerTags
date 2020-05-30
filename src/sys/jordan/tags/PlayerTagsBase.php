@@ -8,7 +8,6 @@ use sys\jordan\tags\session\SessionManager;
 use sys\jordan\tags\tag\TagFactory;
 use pocketmine\plugin\PluginBase;
 use pocketmine\event\Listener;
-use pocketmine\utils\TextFormat;
 
 class PlayerTagsBase extends PluginBase implements Listener {
 
@@ -28,7 +27,6 @@ class PlayerTagsBase extends PluginBase implements Listener {
 		$this->getTagFactory()->enable();
 		$this->getSessionManager()->onEnable();
 		new PlayerTagsListener($this);
-		$this->getLogger()->info(TextFormat::GREEN . "{$this->getDescription()->getFullName()} has been enabled successfully!");
 	}
 
 	/**
