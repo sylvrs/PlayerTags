@@ -2,7 +2,10 @@
 
 Show a tag below the player's name tag!
 
-Poggit: [![](https://poggit.pmmp.io/shield.state/PlayerTags)](https://poggit.pmmp.io/p/PlayerTags)
+### Poggit:
+
+* Download count: [![](https://poggit.pmmp.io/shield.dl.total/PlayerTags)](https://poggit.pmmp.io/p/PlayerTags)
+* Download link: [![](https://poggit.pmmp.io/shield.state/PlayerTags)](https://poggit.pmmp.io/p/PlayerTags)
 
 ## Installation
 
@@ -10,6 +13,10 @@ Poggit: [![](https://poggit.pmmp.io/shield.state/PlayerTags)](https://poggit.pmm
 * Install the plugin in your server's 'plugins' folder.
 * Restart your server.
 * Enjoy!
+
+## Wiki
+
+To see examples or API, please visit the [wiki](https://github.com/sylvrs/PlayerTags/wiki).
 
 ## Supported Tags:
 
