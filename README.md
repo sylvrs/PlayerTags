@@ -11,6 +11,10 @@ Poggit: [![](https://poggit.pmmp.io/shield.state/PlayerTags)](https://poggit.pmm
 * Restart your server.
 * Enjoy!
 
+## Wiki
+
+To see examples or API, please visit the [wiki](https://github.com/sylvrs/PlayerTags/wiki).
+
 ## Supported Tags:
 
 ### Formatting
