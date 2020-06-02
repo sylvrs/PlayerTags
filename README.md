@@ -2,7 +2,10 @@
 
 Show a tag below the player's name tag!
 
-Poggit: [![](https://poggit.pmmp.io/shield.state/PlayerTags)](https://poggit.pmmp.io/p/PlayerTags)
+### Poggit:
+
+Download count: [![](https://poggit.pmmp.io/shield.dl.total/PlayerTags)](https://poggit.pmmp.io/p/PlayerTags)
+Download link: [![](https://poggit.pmmp.io/shield.state/PlayerTags)](https://poggit.pmmp.io/p/PlayerTags)
 
 ## Installation
 
