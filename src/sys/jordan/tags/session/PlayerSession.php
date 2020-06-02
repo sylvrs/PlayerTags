@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace sys\jordan\tags\session;
 
 
+use pocketmine\network\mcpe\protocol\types\DeviceOS;
+use pocketmine\network\mcpe\protocol\types\InputMode;
 use pocketmine\Player;
 use pocketmine\scheduler\ClosureTask;
 use pocketmine\utils\UUID;
 use sys\jordan\tags\PlayerTagsBase;
-use sys\jordan\tags\type\DeviceOS;
-use sys\jordan\tags\type\InputMode;
 use function array_filter;
 use function array_shift;
 use function count;
@@ -157,11 +157,11 @@ class PlayerSession {
 	 */
 	public function getInputModeString(): string {
 		switch($this->getInputMode()) {
-			case InputMode::KEYBOARD:
+			case InputMode::MOUSE_KEYBOARD:
 				return "KB+M";
-			case InputMode::TOUCH:
+			case InputMode::TOUCHSCREEN:
 				return "Touch";
-			case InputMode::CONTROLLER:
+			case InputMode::GAME_PAD:
 				return "Controller";
 			default:
 				return "Unknown";
@@ -193,26 +193,28 @@ class PlayerSession {
 				return "iOS";
 			case DeviceOS::OSX:
 				return "MacOS";
-			case DeviceOS::FIRE_OS:
+			case DeviceOS::AMAZON:
 				return "FireOS";
 			case DeviceOS::GEAR_VR:
 				return "GearVR";
 			case DeviceOS::HOLOLENS:
 				return "HoloLens";
-			case DeviceOS::WIN10:
+			case DeviceOS::WINDOWS_10:
 				return "Windows 10";
 			case DeviceOS::WIN32:
 				return "Windows 32";
 			case DeviceOS::DEDICATED:
 				return "Dedicated";
-			case DeviceOS::TV_OS:
+			case DeviceOS::TVOS:
 				return "tvOS";
-			case DeviceOS::PS4:
+			case DeviceOS::PLAYSTATION:
 				return "PS4";
-			case DeviceOS::SWITCH:
+			case DeviceOS::NINTENDO:
 				return "Switch";
 			case DeviceOS::XBOX:
 				return "Xbox";
+			case DeviceOS::WINDOWS_PHONE:
+				return "Windows Phone";
 			default:
 				return "Unknown";
 		}
