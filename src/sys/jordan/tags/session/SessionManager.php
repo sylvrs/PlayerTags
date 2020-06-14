@@ -9,7 +9,9 @@ use pocketmine\Player;
 use pocketmine\utils\UUID;
 use sys\jordan\tags\PlayerTagsBase;
 use sys\jordan\tags\utils\PlayerTagsBaseTrait;
+use function array_filter;
 use function array_key_exists;
+use function array_search;
 
 class SessionManager {
 
@@ -42,11 +44,8 @@ class SessionManager {
 	 * @param UUID $uuid
 	 * @return PlayerSession|null
 	 */
-	public function create(UUID $uuid): ?PlayerSession {
-		if(!array_key_exists($uuid->toString(), $this->sessions)) {
-			return ($this->sessions[$uuid->toString()] = new PlayerSession($uuid));
-		}
-		return null;
+	public function create(UUID $uuid): PlayerSession {
+		return ($this->sessions[$uuid->toString()] = new PlayerSession($uuid));
 	}
 
 	/**
@@ -56,6 +55,16 @@ class SessionManager {
 		if(array_key_exists($player->getUniqueId()->toString(), $this->sessions)) {
 			($this->sessions[$player->getUniqueId()->toString()])->destroy();
 			unset($this->sessions[$player->getUniqueId()->toString()]);
+		}
+	}
+
+	/**
+	 * @param PlayerSession $session
+	 */
+	public function delete(PlayerSession $session) {
+		if(($key = array_search($session, $this->sessions, true)) !== false) {
+			$session->destroy();
+			unset($this->sessions[$key]);
 		}
 	}
 

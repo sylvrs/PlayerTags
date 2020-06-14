@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace sys\jordan\tags\tag\group\defaults;
 
 
+use pocketmine\entity\Effect;
 use pocketmine\Server;
 use pocketmine\utils\TextFormat;
 use sys\jordan\tags\tag\group\TagGroup;
@@ -67,7 +68,13 @@ class DefaultTagGroup extends TagGroup {
 			}),
 			new Tag("health_bar", function (Player $player): string {
 				$healthString = str_repeat("|", (int) $player->getMaxHealth());
-				return TextFormat::GREEN . ($player->getHealth() < $player->getMaxHealth() ? (substr_replace($healthString, TextFormat::RED, (int) $player->getHealth() - 1, 0)) : $healthString) . ($player->getAbsorption() > 0 ? TextFormat::GOLD . str_repeat("|", (int) $player->getAbsorption()) : "");
+				$color = TextFormat::GREEN;
+				if($player->hasEffect(Effect::POISON)) {
+					$color = TextFormat::YELLOW;
+				} else if($player->hasEffect(Effect::WITHER)) {
+					$color = TextFormat::LIGHT_PURPLE;
+				}
+				return $color . ($player->getHealth() < $player->getMaxHealth() ? (substr_replace($healthString, TextFormat::RED, (int) $player->getHealth() - 1, 0)) : $healthString) . ($player->getAbsorption() > 0 ? TextFormat::GOLD . str_repeat("|", (int) $player->getAbsorption()) : "");
 			}),
 			new Tag("device", function (Player $player): string {
 				return $this->getPlugin()->getSessionManager()->find($player)->getDevice();
