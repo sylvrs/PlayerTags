@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace sys\jordan\tags\tag;
 
 use Exception;
-use pocketmine\math\Vector2;
 use pocketmine\scheduler\ClosureTask;
 use sys\jordan\tags\PlayerTagsBase;
 use sys\jordan\tags\tag\group\defaults\AdvancedJobsTagGroup;
@@ -36,9 +35,6 @@ class TagFactory {
 
 	/** @var Tag[] */
 	private $tags = [];
-
-	/** @var Vector2[] */
-	private $lastVectors = [];
 
 	/** @var string */
 	private $tag;
@@ -174,21 +170,6 @@ class TagFactory {
 				$this->getPlugin()->getLogger()->logException($exception);
 			}
 		}
-		$vector = null;
-		if(!isset($this->lastVectors[$player->getName()])) {
-			$vector = new Vector2($player->getX(), $player->getZ());
-		} else {
-			$vector = $this->lastVectors[$player->getName()];
-		}
-		$speed = $vector->distance($player->getX(), $player->getZ());
-		if($speed > 0) {
-			$message = "{$player->getName()}'s speed: $speed m/s";
-			$player->sendPopup($message);
-			$this->getPlugin()->getLogger()->info($message);
-		}
-		$vector->x = $player->getX();
-		$vector->y = $player->getZ();
-		$this->lastVectors[$player->getName()] = $vector;
 		$this->replaceVisuals($output);
 		return $output;
 	}
