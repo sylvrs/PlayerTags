@@ -17,7 +17,11 @@ class PlayerTagsBase extends PluginBase implements Listener {
 	/** @var TagFactory */
 	private $tagFactory;
 
+	/** @var self */
+	private static $instance;
+
 	public function onLoad(): void {
+		self::$instance = $this;
 		$this->saveDefaultConfig();
 		$this->sessionManager = new SessionManager($this);
 		$this->tagFactory = new TagFactory($this);
@@ -27,6 +31,13 @@ class PlayerTagsBase extends PluginBase implements Listener {
 		$this->getTagFactory()->enable();
 		$this->getSessionManager()->onEnable();
 		new PlayerTagsListener($this);
+	}
+
+	/**
+	 * @return PlayerTagsBase
+	 */
+	public static function getInstance(): PlayerTagsBase {
+		return self::$instance;
 	}
 
 	/**

@@ -56,6 +56,13 @@ class PlayerSession {
 		$this->clickUpdateTask = new ClosureTask(function (int $currentTick): void {
 			$this->calculateClicksPerSecond();
 		});
+		PlayerTagsBase::getInstance()->getScheduler()->scheduleDelayedTask(new ClosureTask(function (int $currentTick): void {
+			$plugin = PlayerTagsBase::getInstance();
+			if(!$this->player instanceof Player) {
+				$plugin->getSessionManager()->delete($this);
+				$plugin->getLogger()->debug("Deleting session due to inactivity");
+			}
+		}), 20 * 30);
 	}
 
 	/**
