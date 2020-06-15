@@ -58,7 +58,7 @@ class PlayerSession {
 		});
 		PlayerTagsBase::getInstance()->getScheduler()->scheduleDelayedTask(new ClosureTask(function (int $currentTick): void {
 			$plugin = PlayerTagsBase::getInstance();
-			if(!$this->player instanceof Player) {
+			if(!isset($this->player) || !$this->player instanceof Player) {
 				$plugin->getSessionManager()->delete($this);
 				$plugin->getLogger()->debug("Deleting session due to inactivity");
 			}
