@@ -9,6 +9,7 @@ use pocketmine\network\mcpe\protocol\types\DeviceOS;
 use pocketmine\network\mcpe\protocol\types\InputMode;
 use pocketmine\Player;
 use pocketmine\scheduler\ClosureTask;
+use pocketmine\scheduler\TaskHandler;
 use pocketmine\utils\UUID;
 use sys\jordan\tags\PlayerTagsBase;
 use function array_filter;
@@ -228,7 +229,9 @@ class PlayerSession {
 	}
 
 	public function destroy(): void {
-		$this->clickUpdateTask->getHandler()->cancel();
+		if($this->clickUpdateTask->getHandler() instanceof TaskHandler) {
+			$this->clickUpdateTask->getHandler()->cancel();
+		}
 		foreach($this as $key => $value) unset($this->$key);
 	}
 
