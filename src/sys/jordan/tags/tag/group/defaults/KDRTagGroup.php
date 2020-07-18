@@ -30,13 +30,13 @@ class KDRTagGroup extends PluginTagGroup {
 	public function register(TagFactory $factory): array {
 		return [
 			new ExternalPluginTag("kills", $this->getExternalPlugin(), function (Player $player, Plugin $plugin): string {
-				return $plugin->getProvider()->playerExists($player) ? (string) $plugin->getProvider()->getPlayerKillPoints($player) : "0";
+				return (string) ($plugin->getProvider()->playerExists($player) ? $plugin->getProvider()->getPlayerKillPoints($player) : 0);
 			}),
 			new ExternalPluginTag("deaths", $this->getExternalPlugin(), function (Player $player, Plugin $plugin): string {
-				return $plugin->getProvider()->playerExists($player) ? (string) $plugin->getProvider()->getPlayerDeathPoints($player) : "0";
+				return (string) ($plugin->getProvider()->playerExists($player) ? (string) $plugin->getProvider()->getPlayerDeathPoints($player) : 0);
 			}),
 			new ExternalPluginTag("kdr", $this->getExternalPlugin(), function (Player $player, Plugin $plugin): string {
-				return $plugin->getProvider()->playerExists($player) ? $plugin->getProvider()->getKillToDeathRatio($player) : "0.0";
+				return (string) ($plugin->getProvider()->playerExists($player) ? $plugin->getProvider()->getKillToDeathRatio($player) : "0.0");
 			}),
 
 		];
