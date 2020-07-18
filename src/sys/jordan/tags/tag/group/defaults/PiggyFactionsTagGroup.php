@@ -27,6 +27,7 @@ class PiggyFactionsTagGroup extends PluginTagGroup {
 	/**
 	 * @param TagFactory $factory
 	 * @return ExternalPluginTag[]
+	 * @noinspection PhpUndefinedMethodInspection
 	 */
 	public function register(TagFactory $factory): array {
 		return [
