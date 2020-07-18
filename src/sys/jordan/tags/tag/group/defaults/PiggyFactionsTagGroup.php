@@ -31,15 +31,19 @@ class PiggyFactionsTagGroup extends PluginTagGroup {
 	public function register(TagFactory $factory): array {
 		return [
 			new ExternalPluginTag("faction_name", $this->getExternalPlugin(), function (Player $player, Plugin $plugin): string {
-				return ($plugin->getPlayerManager()->getPlayer($player->getUniqueId())->getFaction())->getName() ?? "None";
+				$player = $plugin->getPlayerManager()->getPlayer($player->getUniqueId());
+				return $player !== null && $player->getFaction() !== null ? $player->getFaction()->getName() : "None";
 			}),
 			new ExternalPluginTag("faction_power", $this->getExternalPlugin(), function (Player $player, Plugin $plugin): string {
-				$faction = $plugin->getPlayerManager()->getPlayer($player->getUniqueId())->getFaction();
-				return $faction !== null ? (string) round($faction->getPower() ?? -1, 2, PHP_ROUND_HALF_DOWN) : "";
+				$player = $plugin->getPlayerManager()->getPlayer($player->getUniqueId());
+				return $player !== null && $player->getFaction() !== null ? (string) round($player->getFaction()->getPower() ?? -1, 2, PHP_ROUND_HALF_DOWN) : "";
 			}),
 			new ExternalPluginTag("faction_rank", $this->getExternalPlugin(), function (Player $player, Plugin $plugin): string {
-				return $plugin->getPlayerManager()->getPlayer($player->getUniqueId())->getRole() ?? "";
+				$player = $plugin->getPlayerManager()->getPlayer($player->getUniqueId());
+				return $player !== null && $player->getRole() !== null ? $player->getRole() : "";
 			})
 		];
 	}
+
+
 }
