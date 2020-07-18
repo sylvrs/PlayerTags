@@ -25,6 +25,7 @@ class SkyBlockTagGroup extends PluginTagGroup {
 	/**
 	 * @param TagFactory $factory
 	 * @return ExternalPluginTag[]
+	 * @noinspection PhpUndefinedClassInspection
 	 */
 	public function register(TagFactory $factory): array {
 		return [
