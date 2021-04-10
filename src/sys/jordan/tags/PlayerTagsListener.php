@@ -16,6 +16,7 @@ use pocketmine\utils\TextFormat;
 use pocketmine\utils\UUID;
 use sys\jordan\tags\session\PlayerSession;
 use sys\jordan\tags\utils\PlayerTagsBaseTrait;
+use pocketmine\network\mcpe\protocol\types\inventory\UseItemOnEntityTransactionData;
 
 class PlayerTagsListener implements Listener {
 
@@ -68,7 +69,7 @@ class PlayerTagsListener implements Listener {
 			$session->setOS($packet->clientData["DeviceOS"]);
 			$this->getPlugin()->getLogger()->debug("Creating player session");
 		} elseif($packet instanceof InventoryTransactionPacket) {
-			if($packet->transactionType === InventoryTransactionPacket::TYPE_USE_ITEM_ON_ENTITY) {
+			if($packet->trData instanceof UseItemOnEntityTransactionData) {
 				$this->getPlugin()->getSessionManager()->find($player)->addClick();
 			}
 		} elseif($packet instanceof LevelSoundEventPacket) {
