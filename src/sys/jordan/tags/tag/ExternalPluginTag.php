@@ -10,8 +10,7 @@ use function str_ireplace;
 
 class ExternalPluginTag extends Tag {
 
-	/** @var Plugin */
-	private $plugin;
+	private Plugin $plugin;
 
 	/**
 	 * ExternalPluginTag constructor.
