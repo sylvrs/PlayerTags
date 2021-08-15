@@ -67,7 +67,7 @@ class PlayerSession {
 	}
 
 	public function start(PlayerTagsBase $plugin): void {
-		$plugin->getScheduler()->scheduleRepeatingTask($this->getClickUpdateTask(), self::UPDATE_PERIOD);
+		$plugin->getScheduler()->scheduleRepeatingTask($this->clickUpdateTask, self::UPDATE_PERIOD);
 	}
 
 	/**
