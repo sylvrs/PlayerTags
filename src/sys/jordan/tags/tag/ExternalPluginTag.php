@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace sys\jordan\tags\tag;
 
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\plugin\Plugin;
 use function str_ireplace;
 

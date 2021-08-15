@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace sys\jordan\tags\tag;
 
 use Exception;
+use pocketmine\player\Player;
 use pocketmine\scheduler\ClosureTask;
 use sys\jordan\tags\PlayerTagsBase;
 use sys\jordan\tags\tag\group\defaults\AdvancedJobsTagGroup;

@@ -9,7 +9,7 @@ use sys\jordan\tags\PlayerTagsBase;
 use sys\jordan\tags\tag\ExternalPluginTag;
 use sys\jordan\tags\tag\group\PluginTagGroup;
 use sys\jordan\tags\tag\TagFactory;
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\plugin\Plugin;
 
 class FactionsProTagGroup extends PluginTagGroup {
