@@ -4,41 +4,29 @@ declare(strict_types=1);
 
 namespace sys\jordan\tags\tag;
 
-use pocketmine\Player;
+use Closure;
+use pocketmine\player\Player;
 use function str_ireplace;
 
 class Tag {
 
-	/** @var string */
-	private $name;
+	private string $name;
 
-	/** @var callable */
-	protected $replaceCallback;
+	protected Closure $replaceCallback;
 
-	/**
-	 * Tag constructor.
-	 * @param string $name
-	 * @param $replaceCallback
-	 */
-	public function __construct(string $name, callable $replaceCallback) {
+	public function __construct(string $name, Closure $replaceCallback) {
 		$this->name = $name;
 		$this->replaceCallback = $replaceCallback;
 	}
 
-	/**
-	 * @return string
-	 */
 	public function getName(): string {
 		return $this->name;
 	}
-	/**
-	 * @param Player $player
-	 * @param string $input
-	 */
+
 	public function replace(Player $player, string &$input): void {
 		$output = ($this->replaceCallback)($player);
 		if($output === null) return;
-		$input = str_ireplace("{". $this->getName() . "}", $output, $input);
+		$input = str_ireplace("{{$this->getName()}}", $output, $input);
 	}
 
 }
