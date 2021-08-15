@@ -117,7 +117,7 @@ class PlayerSession {
 	public function getInputModeString(): string {
 		switch($this->getInputMode()) {
 			case InputMode::MOUSE_KEYBOARD:
-				return "KB+M";
+				return "Keyboard";
 			case InputMode::TOUCHSCREEN:
 				return "Touch";
 			case InputMode::GAME_PAD:
