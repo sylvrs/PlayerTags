@@ -19,7 +19,6 @@ use sys\jordan\tags\session\PlayerSession;
 use sys\jordan\tags\utils\PlayerTagsBaseTrait;
 
 class PlayerTagsListener implements Listener {
-
 	use PlayerTagsBaseTrait;
 
 	/**

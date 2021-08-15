@@ -10,17 +10,16 @@ use function str_ireplace;
 class Tag {
 
 	/** @var string */
-	private $name;
+	private string $name;
 
-	/** @var callable */
-	protected $replaceCallback;
+	protected \Closure $replaceCallback;
 
 	/**
 	 * Tag constructor.
 	 * @param string $name
-	 * @param $replaceCallback
+	 * @param \Closure $replaceCallback
 	 */
-	public function __construct(string $name, callable $replaceCallback) {
+	public function __construct(string $name, \Closure $replaceCallback ) {
 		$this->name = $name;
 		$this->replaceCallback = $replaceCallback;
 	}

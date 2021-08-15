@@ -9,8 +9,7 @@ use sys\jordan\tags\PlayerTagsBase;
 
 trait PlayerTagsBaseTrait {
 
-	/** @var PlayerTagsBase */
-	private $plugin;
+	private PlayerTagsBase $plugin;
 
 	/**
 	 * @return PlayerTagsBase

@@ -34,19 +34,13 @@ class TagFactory {
 	use PlayerTagsBaseTrait;
 
 	/** @var Tag[] */
-	private $tags = [];
+	private array $tags = [];
+	private string $tag;
 
-	/** @var string */
-	private $tag;
+	private string $colorCharacter;
+	private int $updatePeriod;
 
-	/** @var string */
-	private $colorCharacter;
-
-	/** @var int */
-	private $updatePeriod;
-
-	/** @var MultiWorldTagManager */
-	private $tagManager;
+	private MultiWorldTagManager $tagManager;
 
 	/**
 	 * TagFactory constructor.
