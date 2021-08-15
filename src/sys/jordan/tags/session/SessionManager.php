@@ -9,12 +9,8 @@ use pocketmine\Player;
 use pocketmine\utils\UUID;
 use sys\jordan\tags\PlayerTagsBase;
 use sys\jordan\tags\utils\PlayerTagsBaseTrait;
-use function array_filter;
-use function array_key_exists;
-use function array_search;
 
 class SessionManager {
-
 	use PlayerTagsBaseTrait;
 
 	/** @var PlayerSession[] */
