@@ -11,14 +11,11 @@ use function array_key_exists;
 
 class MultiWorldTagManager {
 
-	/** @var TagFactory */
-	private $factory;
-
-	/** @var bool */
-	private $enabled;
+	private TagFactory $factory;
+	private bool $enabled;
 
 	/** @var string[] */
-	private $tags;
+	private array $tags;
 
 	/**
 	 * MultiWorldTagManager constructor.
