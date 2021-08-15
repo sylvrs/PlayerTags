@@ -8,16 +8,13 @@ namespace sys\jordan\tags\session;
 use pocketmine\player\Player;
 use sys\jordan\tags\PlayerTagsBase;
 use sys\jordan\tags\utils\PlayerTagsBaseTrait;
-use function array_filter;
-use function array_key_exists;
-use function array_search;
 
 class SessionManager {
 
 	use PlayerTagsBaseTrait;
 
 	/** @var PlayerSession[] */
-	private $sessions = [];
+	private array $sessions = [];
 
 	/**
 	 * SessionManager constructor.
@@ -27,52 +24,22 @@ class SessionManager {
 		$this->setPlugin($plugin);
 	}
 
-	/**
-	 * In the case of a reload, kick the players to ensure valid sessions
-	 */
-	public function onEnable(): void {
-		$players = $this->getPlugin()->getServer()->getOnlinePlayers();
-		if(count($players) > 0) {
-			foreach($players as $player) {
-				$player->kick("Invalid session detected. Please join back to validate your session!", false);
-			}
-		}
+	public function get(Player $player): PlayerSession {
+		return $this->sessions[$player->getUniqueId()->toString()] ??= PlayerSession::create($player);
 	}
 
-	/**
-	 * @param UUID $uuid
-	 * @return PlayerSession|null
-	 */
-	public function create(UUID $uuid): PlayerSession {
-		return ($this->sessions[$uuid->toString()] = new PlayerSession($uuid));
-	}
-
-	/**
-	 * @param Player $player
-	 */
 	public function remove(Player $player): void {
-		if(array_key_exists($player->getUniqueId()->toString(), $this->sessions)) {
+		if(isset($this->sessions[$player->getUniqueId()->toString()])) {
 			($this->sessions[$player->getUniqueId()->toString()])->destroy();
 			unset($this->sessions[$player->getUniqueId()->toString()]);
 		}
 	}
 
-	/**
-	 * @param PlayerSession $session
-	 */
-	public function delete(PlayerSession $session) {
-		if(($key = array_search($session, $this->sessions, true)) !== false) {
+	public function delete(PlayerSession $session): void {
+		if(isset($this->sessions[$session->getUuid()->toString()])) {
 			$session->destroy();
-			unset($this->sessions[$key]);
+			unset($this->sessions[$session->getUuid()->toString()]);
 		}
-	}
-
-	/**
-	 * @param Player $player
-	 * @return PlayerSession|null
-	 */
-	public function find(Player $player): ?PlayerSession {
-		return $this->sessions[$player->getUniqueId()->toString()] ?? null;
 	}
 
 	/**
