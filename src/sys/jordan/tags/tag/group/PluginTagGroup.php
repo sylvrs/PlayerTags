@@ -9,26 +9,17 @@ use sys\jordan\tags\tag\ExternalPluginTag;
 use sys\jordan\tags\tag\Tag;
 use sys\jordan\tags\tag\TagFactory;
 use pocketmine\plugin\Plugin;
-use pocketmine\plugin\PluginBase;
 use pocketmine\utils\TextFormat;
 
 abstract class PluginTagGroup extends TagGroup {
 
 	private ?Plugin $externalPlugin;
 
-	/**
-	 * PluginTagGroup constructor.
-	 * @param PlayerTagsBase $plugin
-	 * @param string $pluginName
-	 */
 	public function __construct(PlayerTagsBase $plugin, string $pluginName) {
 		parent::__construct($plugin);
 		$this->externalPlugin = $plugin->getServer()->getPluginManager()->getPlugin($pluginName);
 	}
 
-	/**
-	 * @return Plugin|null
-	 */
 	public function getExternalPlugin(): ?Plugin {
 		return $this->externalPlugin;
 	}
