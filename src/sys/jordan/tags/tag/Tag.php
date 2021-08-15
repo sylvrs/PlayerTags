@@ -8,7 +8,7 @@ use Closure;
 use pocketmine\player\Player;
 use function str_ireplace;
 
-class Tag {
+class Tag implements ITag {
 
 	private string $name;
 
