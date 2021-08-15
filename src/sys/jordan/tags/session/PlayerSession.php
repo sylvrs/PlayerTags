@@ -88,9 +88,7 @@ class PlayerSession {
 	public function calculateClicksPerSecond(): void {
 		if(count($this->clicks) <= 0) return;
 		$current = microtime(true);
-		/*
-		 * Count the number of clicks in that second by comparing the timestamps against the current time
-		 */
+		// Count the number of clicks in that second by comparing the timestamps against the current time
 		$this->clicksPerSecond = count(array_filter($this->clicks, function (float $timestamp) use($current): bool { return ($current - $timestamp) <= 1; }));
 	}
 
