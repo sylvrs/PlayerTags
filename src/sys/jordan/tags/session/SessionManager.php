@@ -20,10 +20,6 @@ class SessionManager {
 	/** @var PlayerSession[] */
 	private array $sessions = [];
 
-	/**
-	 * SessionManager constructor.
-	 * @param PlayerTagsBase $plugin
-	 */
 	public function __construct(PlayerTagsBase $plugin) {
 		$this->setPlugin($plugin);
 	}
@@ -40,17 +36,10 @@ class SessionManager {
 		}
 	}
 
-	/**
-	 * @param UUID $uuid
-	 * @return PlayerSession|null
-	 */
 	public function create(UUID $uuid): PlayerSession {
 		return ($this->sessions[$uuid->toString()] = new PlayerSession($uuid));
 	}
 
-	/**
-	 * @param Player $player
-	 */
 	public function remove(Player $player): void {
 		if(array_key_exists($player->getUniqueId()->toString(), $this->sessions)) {
 			($this->sessions[$player->getUniqueId()->toString()])->destroy();
@@ -58,9 +47,6 @@ class SessionManager {
 		}
 	}
 
-	/**
-	 * @param PlayerSession $session
-	 */
 	public function delete(PlayerSession $session) {
 		if(($key = array_search($session, $this->sessions, true)) !== false) {
 			$session->destroy();
@@ -68,10 +54,6 @@ class SessionManager {
 		}
 	}
 
-	/**
-	 * @param Player $player
-	 * @return PlayerSession|null
-	 */
 	public function find(Player $player): ?PlayerSession {
 		return $this->sessions[$player->getUniqueId()->toString()] ?? null;
 	}
