@@ -23,9 +23,6 @@ class ExternalPluginTag extends Tag {
 		$this->plugin = $externalPlugin;
 	}
 
-	/**
-	 * @return Plugin|null
-	 */
 	public function getPlugin(): Plugin {
 		return $this->plugin;
 	}
