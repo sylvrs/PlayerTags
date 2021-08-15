@@ -24,29 +24,17 @@ class PlayerSession {
 	/** @var int */
 	public const UPDATE_PERIOD = 5;
 
-	/** @var UUID */
-	private $uuid;
+	private UUID $uuid;
+	private Player $player;
 
-	/** @var Player */
-	private $player;
-
-	/** @var string */
-	private $device;
-
-	/** @var int */
-	private $inputMode;
-
-	/** @var int */
-	private $os;
+	private string $device;
+	private int $inputMode;
+	private int $os;
 
 	/** @var int[] */
-	private $clicks = [];
-
-	/** @var float */
-	private $clicksPerSecond = 0.0;
-
-	/** @var ClosureTask */
-	private $clickUpdateTask;
+	private array $clicks = [];
+	private float $clicksPerSecond = 0.0;
+	private ClosureTask $clickUpdateTask;
 
 	/**
 	 * PlayerSession constructor.
