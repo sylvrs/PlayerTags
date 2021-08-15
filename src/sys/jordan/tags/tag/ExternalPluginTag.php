@@ -27,10 +27,6 @@ class ExternalPluginTag extends Tag {
 		return $this->plugin;
 	}
 
-	/**
-	 * @param Player $player
-	 * @param string $input
-	 */
 	public function replace(Player $player, string &$input): void {
 		$output = ($this->replaceCallback)($player, $this->getPlugin());
 		if($output === null) return;
