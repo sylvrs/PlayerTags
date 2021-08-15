@@ -25,17 +25,14 @@ class PlayerSession {
 
 	protected UuidInterface $uuid;
 
-	/** @var string */
-	private $device;
-
-	/** @var int */
-	private $inputMode;
-
-	/** @var int */
-	private $os;
+	private string $device;
+	private int $inputMode;
+	private int $os;
 
 	/** @var int[] */
-	private $clicks = [];
+	private array $clicks = [];
+	private float $clicksPerSecond = 0.0;
+	private ClosureTask $clickUpdateTask;
 
 	public function __construct(protected Player $player) {
 		$this->uuid = $player->getUniqueId();
