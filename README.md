@@ -31,7 +31,7 @@ To see examples or API, please visit the [wiki](https://github.com/sylvrs/Player
 |      Name     | Description                                               |
 |:-------------:|-----------------------------------------------------------|
 |  {x}/{y}/{z}  | The player's coordinates                                  |
-|    {level}    | The player's current level                                |
+|    {world}    | The player's current level                                |
 |   {item_id}   | The ID of the item in the player's hand                   |
 | {item_damage} | The damage of the item in the player's hand               |
 |  {item_count} | The amount of the item in the player's hand               |
