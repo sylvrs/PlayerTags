@@ -33,11 +33,8 @@ abstract class PluginTagGroup extends TagGroup {
 		return $this->externalPlugin;
 	}
 
-	/**
-	 * @return bool
-	 */
-	public function check(): bool {
-		return $this->getExternalPlugin() instanceof PluginBase;
+	public function isLoaded(): bool {
+		return $this->getExternalPlugin() instanceof Plugin;
 	}
 
 	/**
@@ -45,7 +42,7 @@ abstract class PluginTagGroup extends TagGroup {
 	 * @return Tag[]
 	 */
 	public function load(TagFactory $factory): array {
-		if($this->check()) {
+		if($this->isLoaded()) {
 			$this->getPlugin()->getLogger()->info(TextFormat::GREEN . "{$this->getExternalPlugin()->getDescription()->getName()} support has been enabled!");
 			return $this->register($factory);
 		}
