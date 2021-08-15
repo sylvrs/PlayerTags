@@ -37,6 +37,6 @@ class ExternalPluginTag extends Tag {
 	public function replace(Player $player, string &$input): void {
 		$output = ($this->replaceCallback)($player, $this->getPlugin());
 		if($output === null) return;
-		$input = str_ireplace("{". $this->getName() . "}", $output, $input);
+		$input = str_ireplace("{{$this->getName()}}", $output, $input);
 	}
 }

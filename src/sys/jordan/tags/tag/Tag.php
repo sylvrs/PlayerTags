@@ -37,7 +37,7 @@ class Tag {
 	public function replace(Player $player, string &$input): void {
 		$output = ($this->replaceCallback)($player);
 		if($output === null) return;
-		$input = str_ireplace("{". $this->getName() . "}", $output, $input);
+		$input = str_ireplace("{{$this->getName()}}", $output, $input);
 	}
 
 }
