@@ -37,7 +37,7 @@ class SessionManager {
 	}
 
 	public function create(UUID $uuid): PlayerSession {
-		return ($this->sessions[$uuid->toString()] = new PlayerSession($uuid));
+		return $this->sessions[$uuid->toString()] ??= new PlayerSession($uuid);
 	}
 
 	public function remove(Player $player): void {
