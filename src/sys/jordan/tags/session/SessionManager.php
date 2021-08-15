@@ -18,7 +18,7 @@ class SessionManager {
 	use PlayerTagsBaseTrait;
 
 	/** @var PlayerSession[] */
-	private $sessions = [];
+	private array $sessions = [];
 
 	/**
 	 * SessionManager constructor.
