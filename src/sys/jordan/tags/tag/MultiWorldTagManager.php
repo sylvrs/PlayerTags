@@ -28,16 +28,10 @@ class MultiWorldTagManager {
 		$this->tags = $config->getNested("multi-world.worlds", []);
 	}
 
-	/**
-	 * @return bool
-	 */
 	public function isEnabled(): bool {
 		return $this->enabled;
 	}
 
-	/**
-	 * @return TagFactory
-	 */
 	public function getFactory(): TagFactory {
 		return $this->factory;
 	}
@@ -49,26 +43,14 @@ class MultiWorldTagManager {
 		return $this->tags;
 	}
 
-	/**
-	 * @param string $key
-	 * @return string|null
-	 */
 	public function getTag(string $key): ?string {
 		return $this->tags[$key] ?? null;
 	}
 
-	/**
-	 * @param string $key
-	 * @return bool
-	 */
 	public function hasTag(string $key): bool {
 		return array_key_exists($key, $this->tags);
 	}
 
-	/**
-	 * @param Player $player
-	 * @return string
-	 */
 	public function getTagForLevel(Player $player): string {
 		return ($this->isEnabled() && $player->isValid() && $this->hasTag($player->getLevel()->getFolderName())) ? $this->getTag($player->getLevel()->getFolderName()) : $this->getFactory()->getTagString();
 	}
