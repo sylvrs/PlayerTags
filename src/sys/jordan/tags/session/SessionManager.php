@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace sys\jordan\tags\session;
 
 
-use pocketmine\Player;
-use pocketmine\utils\UUID;
+use pocketmine\player\Player;
 use sys\jordan\tags\PlayerTagsBase;
 use sys\jordan\tags\utils\PlayerTagsBaseTrait;
 use function array_filter;

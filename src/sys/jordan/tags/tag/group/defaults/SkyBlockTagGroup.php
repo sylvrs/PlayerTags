@@ -3,8 +3,7 @@
 
 namespace sys\jordan\tags\tag\group\defaults;
 
-
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\plugin\Plugin;
 use room17\SkyBlock\island\RankIds;
 use sys\jordan\tags\PlayerTagsBase;

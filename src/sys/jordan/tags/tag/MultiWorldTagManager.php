@@ -4,7 +4,7 @@
 namespace sys\jordan\tags\tag;
 
 
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\utils\Config;
 use function array_key_exists;
 

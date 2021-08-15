@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace sys\jordan\tags\tag\group\defaults;
 
 
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\plugin\Plugin;
 use sys\jordan\tags\PlayerTagsBase;
 use sys\jordan\tags\tag\ExternalPluginTag;
