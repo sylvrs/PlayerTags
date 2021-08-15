@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace sys\jordan\tags\session;
 
 
+use Exception;
 use pocketmine\network\mcpe\protocol\types\DeviceOS;
 use pocketmine\network\mcpe\protocol\types\InputMode;
 use pocketmine\player\Player;
+use pocketmine\player\PlayerInfo;
 use pocketmine\scheduler\ClosureTask;
 use Ramsey\Uuid\UuidInterface;
 use sys\jordan\tags\PlayerTagsBase;
@@ -34,22 +36,28 @@ class PlayerSession {
 	private float $clicksPerSecond = 0.0;
 	private ClosureTask $clickUpdateTask;
 
+	/**
+	 * @throws Exception
+	 */
+	public static function create(Player $player): self {
+		$session = new self($player);
+		$info = $player->getNetworkSession()->getPlayerInfo();
+		if(!$info instanceof PlayerInfo) {
+			throw new Exception("Info for player {$player->getName()} was null");
+		}
+		$extraData = $info->getExtraData();
+		$session->setDevice($extraData["DeviceModel"]);
+		$session->setInputMode($extraData["CurrentInputMode"]);
+		$session->setOS($extraData["DeviceOS"]);
+		return $session;
+	}
+
 	public function __construct(protected Player $player) {
 		$this->uuid = $player->getUniqueId();
 
-	/** @var ClosureTask */
-	private $clickUpdateTask;
+		$this->clickUpdateTask = new ClosureTask(function (): void { $this->calculateClicksPerSecond(); });
 
-	/**
-	 * PlayerSession constructor.
-	 * @param UUID $uuid
-	 */
-	public function __construct(UUID $uuid) {
-		$this->uuid = $uuid;
-		$this->clickUpdateTask = new ClosureTask(function (int $currentTick): void {
-			$this->calculateClicksPerSecond();
-		});
-		PlayerTagsBase::getInstance()->getScheduler()->scheduleDelayedTask(new ClosureTask(function (int $currentTick): void {
+		PlayerTagsBase::getInstance()->getScheduler()->scheduleDelayedTask(new ClosureTask(function (): void {
 			$plugin = PlayerTagsBase::getInstance();
 			if(!isset($this->player) || !$this->player instanceof Player) {
 				$plugin->getSessionManager()->delete($this);
