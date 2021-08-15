@@ -167,9 +167,7 @@ class PlayerSession {
 	}
 
 	public function destroy(): void {
-		if($this->clickUpdateTask->getHandler() instanceof TaskHandler) {
-			$this->clickUpdateTask->getHandler()->cancel();
-		}
+		$this->clickUpdateTask?->getHandler()->cancel();
 		foreach($this as $key => $value) unset($this->$key);
 	}
 
