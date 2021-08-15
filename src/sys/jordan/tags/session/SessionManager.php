@@ -41,16 +41,16 @@ class SessionManager {
 	}
 
 	public function remove(Player $player): void {
-		if(array_key_exists($player->getUniqueId()->toString(), $this->sessions)) {
+		if(isset($this->sessions[$player->getUniqueId()->toString()])) {
 			($this->sessions[$player->getUniqueId()->toString()])->destroy();
 			unset($this->sessions[$player->getUniqueId()->toString()]);
 		}
 	}
 
 	public function delete(PlayerSession $session) {
-		if(($key = array_search($session, $this->sessions, true)) !== false) {
+		if(isset($this->sessions[$session->getUUID()->toString()])) {
 			$session->destroy();
-			unset($this->sessions[$key]);
+			unset($this->sessions[$session->getUUID()->toString()]);
 		}
 	}
 
