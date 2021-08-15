@@ -66,9 +66,6 @@ class PlayerSession {
 		}), 20 * 30);
 	}
 
-	/**
-	 * @param PlayerTagsBase $plugin
-	 */
 	public function start(PlayerTagsBase $plugin): void {
 		$plugin->getScheduler()->scheduleRepeatingTask($this->getClickUpdateTask(), self::UPDATE_PERIOD);
 	}
@@ -80,23 +77,14 @@ class PlayerSession {
 		return $this->uuid;
 	}
 
-	/**
-	 * @return Player
-	 */
 	public function getPlayer(): Player {
 		return $this->player;
 	}
 
-	/**
-	 * @param Player $player
-	 */
 	public function setPlayer(Player $player): void {
 		$this->player = $player;
 	}
 
-	/**
-	 * @return float
-	 */
 	public function getClicksPerSecond(): float {
 		return $this->clicksPerSecond;
 	}
@@ -125,44 +113,22 @@ class PlayerSession {
 		$this->clicksPerSecond = count(array_filter($this->clicks, function (float $timestamp) use($current): bool { return ($current - $timestamp) <= 1; }));
 	}
 
-	/**
-	 * @return ClosureTask
-	 */
-	public function getClickUpdateTask(): ClosureTask {
-		return $this->clickUpdateTask;
-	}
-
-	/**
-	 * @return string
-	 */
 	public function getDevice(): string {
 		return $this->device;
 	}
 
-	/**
-	 * @param string $device
-	 */
 	public function setDevice(string $device): void {
 		$this->device = $device;
 	}
 
-	/**
-	 * @return int
-	 */
 	public function getInputMode(): int {
 		return $this->inputMode;
 	}
 
-	/**
-	 * @param int $inputMode
-	 */
 	public function setInputMode(int $inputMode): void {
 		$this->inputMode = $inputMode;
 	}
 
-	/**
-	 * @return string
-	 */
 	public function getInputModeString(): string {
 		return match ($this->getInputMode()) {
 			InputMode::MOUSE_KEYBOARD => "Keyboard",
@@ -172,23 +138,14 @@ class PlayerSession {
 		};
 	}
 
-	/**
-	 * @return int
-	 */
 	public function getOS(): int {
 		return $this->os;
 	}
 
-	/**
-	 * @param int $os
-	 */
 	public function setOS(int $os): void {
 		$this->os = $os;
 	}
 
-	/**
-	 * @return string
-	 */
 	public function getOSString(): string {
 		return match ($this->getOS()) {
 			DeviceOS::ANDROID => "Android",
