@@ -50,8 +50,8 @@ class MultiWorldTagManager {
 		return isset($this->tags[$key]);
 	}
 
-	public function getTagForLevel(Player $player): string {
-		return ($this->isEnabled() && $player->isValid() && $this->hasTag($player->getLevel()->getFolderName())) ? $this->getTag($player->getLevel()->getFolderName()) : $this->getFactory()->getTagString();
+	public function getTagForWorld(Player $player): string {
+		return ($this->isEnabled() && $player->getLocation()->isValid() && $this->hasTag($player->getWorld()->getFolderName())) ? $this->getTag($player->getWorld()->getFolderName()) : $this->getFactory()->getTagString();
 	}
 
 }
