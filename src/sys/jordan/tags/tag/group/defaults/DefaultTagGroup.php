@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace sys\jordan\tags\tag\group\defaults;
 
 
-use pocketmine\entity\Effect;
-use pocketmine\Server;
+use pocketmine\entity\effect\VanillaEffects;
+use pocketmine\item\Durable;
+use pocketmine\player\Player;
 use pocketmine\utils\TextFormat;
 use sys\jordan\tags\tag\group\TagGroup;
 use sys\jordan\tags\tag\Tag;
 use sys\jordan\tags\tag\TagFactory;
-use pocketmine\Player;
 use function round;
 use function str_repeat;
 use function substr_replace;
@@ -20,27 +20,28 @@ class DefaultTagGroup extends TagGroup {
 
 	/**
 	 * @param TagFactory $factory
-	 * @return array
+	 * @return Tag[]
 	 */
 	public function load(TagFactory $factory): array {
 		return [
 			new Tag("x", function (Player $player): string {
-				return (string) $player->getFloorX();
+				return (string) $player->getPosition()->getFloorX();
 			}),
 			new Tag("y", function (Player $player): string {
-				return (string) $player->getFloorY();
+				return (string) $player->getPosition()->getFloorY();
 			}),
 			new Tag("z", function (Player $player): string {
-				return (string) $player->getFloorZ();
+				return (string) $player->getPosition()->getFloorZ();
 			}),
-			new Tag("level", function (Player $player): string {
-				return $player->isValid() ? $player->getLevel()->getName() : "unknown";
+			new Tag("world", function (Player $player): string {
+				return $player->getLocation()->isValid() ? $player->getWorld()->getDisplayName() : "unknown";
 			}),
 			new Tag("item_id", function (Player $player): string {
 				return (string) $player->getInventory()->getItemInHand()->getId();
 			}),
 			new Tag("item_damage", function (Player $player): string {
-				return (string) $player->getInventory()->getItemInHand()->getDamage();
+				$item = $player->getInventory()->getItemInHand();
+				return (string) ($item instanceof Durable ? $item->getDamage() : $item->getMeta());
 			}),
 			new Tag("item_count", function (Player $player): string {
 				return (string) $player->getInventory()->getItemInHand()->getCount();
@@ -49,17 +50,16 @@ class DefaultTagGroup extends TagGroup {
 				return $player->getInventory()->getItemInHand()->getName();
 			}),
 			new Tag("ip", function (Player $player): string {
-				return $player->getAddress();
+				return $player->getNetworkSession()->getIp();
 			}),
 			new Tag("gamemode", function (Player $player): string {
-				return Server::getGamemodeName($player->getGamemode());
+				return $player->getGamemode()->getEnglishName();
 			}),
 			new Tag("ping", function (Player $player): string {
-				return (string) $player->getPing();
+				return (string) $player->getNetworkSession()->getPing();
 			}),
 			new Tag("cps", function (Player $player): string {
-				$session = $this->getPlugin()->getSessionManager()->find($player);
-				return (string) ($session !== null ? $session->getClicksPerSecond() : 0);
+				return (string) $this->getPlugin()->getSessionManager()->get($player)->getClicksPerSecond();
 			}),
 			new Tag("health", function (Player $player): string {
 				return (string) round($player->getHealth(), 2);
@@ -68,26 +68,23 @@ class DefaultTagGroup extends TagGroup {
 				return (string) $player->getMaxHealth();
 			}),
 			new Tag("health_bar", function (Player $player): string {
-				$healthString = str_repeat("|", (int) $player->getMaxHealth());
-				$color = TextFormat::GREEN;
-				if($player->hasEffect(Effect::POISON)) {
-					$color = TextFormat::YELLOW;
-				} else if($player->hasEffect(Effect::WITHER)) {
-					$color = TextFormat::LIGHT_PURPLE;
-				}
+				$healthString = str_repeat("|", $player->getMaxHealth());
+				$effects = $player->getEffects();
+				$color = match(true) {
+					$effects->has(VanillaEffects::POISON()) => TextFormat::YELLOW,
+					$effects->has(VanillaEffects::WITHER()) => TextFormat::LIGHT_PURPLE,
+					default => TextFormat::GREEN
+				};
 				return $color . ($player->getHealth() < $player->getMaxHealth() ? (substr_replace($healthString, TextFormat::RED, (int) $player->getHealth() - 1, 0)) : $healthString) . ($player->getAbsorption() > 0 ? TextFormat::GOLD . str_repeat("|", (int) $player->getAbsorption()) : "");
 			}),
 			new Tag("device", function (Player $player): string {
-				$session = $this->getPlugin()->getSessionManager()->find($player);
-				return $session !== null ? $session->getDevice() : "";
+				return $this->getPlugin()->getSessionManager()->get($player)->getDevice();
 			}),
 			new Tag("input_mode", function (Player $player): string{
-				$session = $this->getPlugin()->getSessionManager()->find($player);
-				return $session !== null ? $session->getInputModeString() : "";
+				return $this->getPlugin()->getSessionManager()->get($player)->getInputModeString();
 			}),
 			new Tag("os", function (Player $player): string {
-				$session = $this->getPlugin()->getSessionManager()->find($player);
-				return $session !== null ? $session->getOSString() : "";
+				return $this->getPlugin()->getSessionManager()->get($player)->getOSString();
 			})
 		];
 	}
