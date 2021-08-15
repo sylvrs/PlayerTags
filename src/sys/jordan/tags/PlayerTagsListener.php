@@ -34,7 +34,7 @@ class PlayerTagsListener implements Listener {
 	/**
 	 * @param PlayerPreLoginEvent $event
 	 *
-	 * Create new player session
+	 * @priority LOWEST
 	 */
 	public function handlePlayerPreLogin(PlayerPreLoginEvent $event): void {
 		$player = $event->getPlayer();
@@ -48,7 +48,7 @@ class PlayerTagsListener implements Listener {
 	/**
 	 * @param PlayerQuitEvent $event
 	 *
-	 * Destroy player session
+	 * @priority LOWEST
 	 */
 	public function handleQuit(PlayerQuitEvent $event): void {
 		$this->getPlugin()->getSessionManager()->remove($event->getPlayer());
@@ -57,6 +57,8 @@ class PlayerTagsListener implements Listener {
 
 	/**
 	 * @param DataPacketReceiveEvent $event
+	 *
+	 * @priority LOWEST
 	 */
 	public function handleDataPacketReceive(DataPacketReceiveEvent $event): void {
 		$player = $event->getPlayer();
