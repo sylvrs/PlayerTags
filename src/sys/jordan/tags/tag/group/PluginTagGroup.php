@@ -14,8 +14,7 @@ use pocketmine\utils\TextFormat;
 
 abstract class PluginTagGroup extends TagGroup {
 
-	/** @var Plugin|null */
-	private $externalPlugin;
+	private ?Plugin $externalPlugin;
 
 	/**
 	 * PluginTagGroup constructor.
