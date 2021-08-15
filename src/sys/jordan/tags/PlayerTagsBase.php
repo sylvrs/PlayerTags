@@ -28,23 +28,14 @@ class PlayerTagsBase extends PluginBase implements Listener {
 		new PlayerTagsListener($this);
 	}
 
-	/**
-	 * @return PlayerTagsBase
-	 */
 	public static function getInstance(): PlayerTagsBase {
 		return self::$instance;
 	}
 
-	/**
-	 * @return SessionManager
-	 */
 	public function getSessionManager(): SessionManager {
 		return $this->sessionManager;
 	}
 
-	/**
-	 * @return TagFactory
-	 */
 	public function getTagFactory(): TagFactory {
 		return $this->tagFactory;
 	}
