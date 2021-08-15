@@ -7,7 +7,6 @@ namespace sys\jordan\tags\tag;
 
 use pocketmine\player\Player;
 use pocketmine\utils\Config;
-use function array_key_exists;
 
 class MultiWorldTagManager {
 
@@ -48,7 +47,7 @@ class MultiWorldTagManager {
 	}
 
 	public function hasTag(string $key): bool {
-		return array_key_exists($key, $this->tags);
+		return isset($this->tags[$key]);
 	}
 
 	public function getTagForLevel(Player $player): string {
