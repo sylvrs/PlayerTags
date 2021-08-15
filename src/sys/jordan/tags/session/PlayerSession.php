@@ -36,10 +36,6 @@ class PlayerSession {
 	private float $clicksPerSecond = 0.0;
 	private ClosureTask $clickUpdateTask;
 
-	/**
-	 * PlayerSession constructor.
-	 * @param UUID $uuid
-	 */
 	public function __construct(UUID $uuid) {
 		$this->uuid = $uuid;
 		$this->clickUpdateTask = new ClosureTask(function (int $currentTick): void {
@@ -54,37 +50,22 @@ class PlayerSession {
 		}), 20 * 30);
 	}
 
-	/**
-	 * @param PlayerTagsBase $plugin
-	 */
 	public function start(PlayerTagsBase $plugin): void {
 		$plugin->getScheduler()->scheduleRepeatingTask($this->getClickUpdateTask(), self::UPDATE_PERIOD);
 	}
 
-	/**
-	 * @return UUID
-	 */
 	public function getUUID(): UUID {
 		return $this->uuid;
 	}
 
-	/**
-	 * @return Player
-	 */
 	public function getPlayer(): Player {
 		return $this->player;
 	}
 
-	/**
-	 * @param Player $player
-	 */
 	public function setPlayer(Player $player): void {
 		$this->player = $player;
 	}
 
-	/**
-	 * @return float
-	 */
 	public function getClicksPerSecond(): float {
 		return $this->clicksPerSecond;
 	}
@@ -113,44 +94,26 @@ class PlayerSession {
 		$this->clicksPerSecond = count(array_filter($this->clicks, function (float $timestamp) use($current): bool { return ($current - $timestamp) <= 1; }));
 	}
 
-	/**
-	 * @return ClosureTask
-	 */
 	public function getClickUpdateTask(): ClosureTask {
 		return $this->clickUpdateTask;
 	}
 
-	/**
-	 * @return string
-	 */
 	public function getDevice(): string {
 		return $this->device;
 	}
 
-	/**
-	 * @param string $device
-	 */
 	public function setDevice(string $device): void {
 		$this->device = $device;
 	}
 
-	/**
-	 * @return int
-	 */
 	public function getInputMode(): int {
 		return $this->inputMode;
 	}
 
-	/**
-	 * @param int $inputMode
-	 */
 	public function setInputMode(int $inputMode): void {
 		$this->inputMode = $inputMode;
 	}
 
-	/**
-	 * @return string
-	 */
 	public function getInputModeString(): string {
 		switch($this->getInputMode()) {
 			case InputMode::MOUSE_KEYBOARD:
@@ -164,23 +127,14 @@ class PlayerSession {
 		}
 	}
 
-	/**
-	 * @return int
-	 */
 	public function getOS(): int {
 		return $this->os;
 	}
 
-	/**
-	 * @param int $os
-	 */
 	public function setOS(int $os): void {
 		$this->os = $os;
 	}
 
-	/**
-	 * @return string
-	 */
 	public function getOSString(): string {
 		switch($this->getOS()) {
 			case DeviceOS::ANDROID:
