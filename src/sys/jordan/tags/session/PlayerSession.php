@@ -7,10 +7,9 @@ namespace sys\jordan\tags\session;
 
 use pocketmine\network\mcpe\protocol\types\DeviceOS;
 use pocketmine\network\mcpe\protocol\types\InputMode;
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\scheduler\ClosureTask;
-use pocketmine\scheduler\TaskHandler;
-use pocketmine\utils\UUID;
+use Ramsey\Uuid\UuidInterface;
 use sys\jordan\tags\PlayerTagsBase;
 use function array_filter;
 use function array_shift;
@@ -24,11 +23,7 @@ class PlayerSession {
 	/** @var int */
 	public const UPDATE_PERIOD = 5;
 
-	/** @var UUID */
-	private $uuid;
-
-	/** @var Player */
-	private $player;
+	protected UuidInterface $uuid;
 
 	/** @var string */
 	private $device;
@@ -42,8 +37,8 @@ class PlayerSession {
 	/** @var int[] */
 	private $clicks = [];
 
-	/** @var float */
-	private $clicksPerSecond = 0.0;
+	public function __construct(protected Player $player) {
+		$this->uuid = $player->getUniqueId();
 
 	/** @var ClosureTask */
 	private $clickUpdateTask;
@@ -70,10 +65,7 @@ class PlayerSession {
 		$plugin->getScheduler()->scheduleRepeatingTask($this->clickUpdateTask, self::UPDATE_PERIOD);
 	}
 
-	/**
-	 * @return UUID
-	 */
-	public function getUUID(): UUID {
+	public function getUuid(): UuidInterface {
 		return $this->uuid;
 	}
 
