@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @noinspection PhpUndefinedNamespaceInspection
+ * @noinspection PhpUndefinedMethodInspection
+ * @noinspection PhpUndefinedClassInspection
+ */
 declare(strict_types=1);
 
 namespace sys\jordan\tags\tag\group\defaults;
