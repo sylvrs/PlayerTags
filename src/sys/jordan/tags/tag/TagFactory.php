@@ -123,7 +123,7 @@ class TagFactory {
 		if(strlen($this->tag) <= 0) {
 			return "";
 		}
-		$output = $this->getTagManager()->getTagForLevel($player);
+		$output = $this->getTagManager()->getTagForWorld($player);
 		foreach($this->getTags() as $tag) {
 			try {
 				$tag->replace($player, $output);
