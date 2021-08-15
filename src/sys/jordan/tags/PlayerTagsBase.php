@@ -11,14 +11,9 @@ use pocketmine\event\Listener;
 
 class PlayerTagsBase extends PluginBase implements Listener {
 
-	/** @var SessionManager */
-	private $sessionManager;
-
-	/** @var TagFactory */
-	private $tagFactory;
-
-	/** @var self */
-	private static $instance;
+	private SessionManager $sessionManager;
+	private TagFactory $tagFactory;
+	private static self $instance;
 
 	public function onLoad(): void {
 		self::$instance = $this;
