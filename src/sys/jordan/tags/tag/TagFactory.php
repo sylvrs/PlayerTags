@@ -137,7 +137,8 @@ class TagFactory {
 	}
 
 	public function update(): void {
-		foreach($this->getPlugin()->getServer()->getOnlinePlayers() as $player) {
+		$players = array_filter($this->getPlugin()->getServer()->getOnlinePlayers(), static fn(Player $player): bool => $player->isOnline() && $player->spawned);
+		foreach($players as $player) {
 			$player->setScoreTag($this->replace($player));
 		}
 	}
