@@ -15,10 +15,6 @@ use pocketmine\plugin\Plugin;
 
 class PurePermsTagGroup extends PluginTagGroup {
 
-	/**
-	 * PurePermsTagGroup constructor.
-	 * @param PlayerTagsBase $plugin
-	 */
 	public function __construct(PlayerTagsBase $plugin) {
 		parent::__construct($plugin, "PurePerms");
 	}

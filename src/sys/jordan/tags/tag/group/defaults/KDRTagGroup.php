@@ -14,10 +14,6 @@ use sys\jordan\tags\tag\TagFactory;
 
 class KDRTagGroup extends PluginTagGroup {
 
-	/**
-	 * KDRTagGroup constructor.
-	 * @param PlayerTagsBase $plugin
-	 */
 	public function __construct(PlayerTagsBase $plugin) {
 		parent::__construct($plugin, "KDR");
 	}
