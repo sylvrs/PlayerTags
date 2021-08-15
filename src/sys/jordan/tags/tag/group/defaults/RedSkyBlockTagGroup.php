@@ -14,10 +14,6 @@ use pocketmine\plugin\Plugin;
 
 class RedSkyBlockTagGroup extends PluginTagGroup {
 
-	/**
-	 * RedSkyBlockTagGroup constructor.
-	 * @param PlayerTagsBase $plugin
-	 */
 	public function __construct(PlayerTagsBase $plugin) {
 		parent::__construct($plugin, "RedSkyBlock");
 	}

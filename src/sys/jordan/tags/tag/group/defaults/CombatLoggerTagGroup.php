@@ -10,15 +10,10 @@ use sys\jordan\tags\PlayerTagsBase;
 use sys\jordan\tags\tag\ExternalPluginTag;
 use sys\jordan\tags\tag\group\PluginTagGroup;
 use sys\jordan\tags\tag\TagFactory;
-use pocketmine\Player;
 use pocketmine\plugin\Plugin;
 
 class CombatLoggerTagGroup extends PluginTagGroup {
 
-	/**
-	 * CombatLoggerTagGroup constructor.
-	 * @param PlayerTagsBase $plugin
-	 */
 	public function __construct(PlayerTagsBase $plugin) {
 		parent::__construct($plugin, "CombatLogger");
 	}

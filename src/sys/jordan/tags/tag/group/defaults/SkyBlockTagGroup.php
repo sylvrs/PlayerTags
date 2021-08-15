@@ -14,10 +14,6 @@ use sys\jordan\tags\tag\TagFactory;
 
 class SkyBlockTagGroup extends PluginTagGroup {
 
-	/**
-	 * SkyBlockTagGroup constructor.
-	 * @param PlayerTagsBase $plugin
-	 */
 	public function __construct(PlayerTagsBase $plugin) {
 		parent::__construct($plugin, "SkyBlock");
 	}
@@ -25,7 +21,6 @@ class SkyBlockTagGroup extends PluginTagGroup {
 	/**
 	 * @param TagFactory $factory
 	 * @return ExternalPluginTag[]
-	 * @noinspection PhpUndefinedClassInspection
 	 */
 	public function register(TagFactory $factory): array {
 		return [

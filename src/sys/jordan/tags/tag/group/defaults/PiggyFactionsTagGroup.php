@@ -16,10 +16,6 @@ use const PHP_ROUND_HALF_DOWN;
 
 class PiggyFactionsTagGroup extends PluginTagGroup {
 
-	/**
-	 * PiggyFactionsTagGroup constructor.
-	 * @param PlayerTagsBase $plugin
-	 */
 	public function __construct(PlayerTagsBase $plugin) {
 		parent::__construct($plugin, "PiggyFactions");
 	}

@@ -14,10 +14,6 @@ use pocketmine\plugin\Plugin;
 
 class RankUpTagGroup extends PluginTagGroup {
 
-	/**
-	 * RankUpTagGroup constructor.
-	 * @param PlayerTagsBase $plugin
-	 */
 	public function __construct(PlayerTagsBase $plugin) {
 		parent::__construct($plugin, "RankUp");
 	}
