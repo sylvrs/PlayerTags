@@ -21,10 +21,8 @@ use sys\jordan\tags\tag\group\defaults\RedSkyBlockTagGroup;
 use sys\jordan\tags\tag\group\defaults\SkyBlockTagGroup;
 use sys\jordan\tags\tag\group\TagGroup;
 use sys\jordan\tags\utils\PlayerTagsBaseTrait;
-use pocketmine\Player;
 use pocketmine\utils\TextFormat;
 
-use function array_key_exists;
 use function count;
 use function str_ireplace;
 use function str_replace;
@@ -35,24 +33,16 @@ class TagFactory {
 	use PlayerTagsBaseTrait;
 
 	/** @var Tag[] */
-	private $tags = [];
+	private array $tags = [];
 
-	/** @var string */
-	private $tag;
+	private string $tag;
+	private string $colorCharacter;
 
-	/** @var string */
-	private $colorCharacter;
+	private int $updatePeriod;
 
-	/** @var int */
-	private $updatePeriod;
+	private MultiWorldTagManager $tagManager;
 
-	/** @var MultiWorldTagManager */
-	private $tagManager;
 
-	/**
-	 * TagFactory constructor.
-	 * @param PlayerTagsBase $plugin
-	 */
 	public function __construct(PlayerTagsBase $plugin) {
 		$this->setPlugin($plugin);
 		$this->tag = $plugin->getConfig()->get("tag", "");
@@ -63,40 +53,25 @@ class TagFactory {
 	}
 
 	public function enable(): void {
-		/*
-		 * Only start task if the tag string length > 0
-		 */
 		if(strlen($this->getTagString()) > 0) {
-			$this->getPlugin()->getScheduler()->scheduleRepeatingTask(new ClosureTask(function (int $currentTick): void {
+			$this->getPlugin()->getScheduler()->scheduleRepeatingTask(new ClosureTask(function (): void {
 				$this->update();
 			}), $this->getUpdatePeriod());
 		}
 	}
 
-	/**
-	 * @return string
-	 */
 	public function getTagString(): string {
 		return $this->tag;
 	}
 
-	/**
-	 * @return string
-	 */
 	public function getColorCharacter(): string {
 		return $this->colorCharacter;
 	}
 
-	/**
-	 * @return int
-	 */
 	public function getUpdatePeriod(): int {
 		return $this->updatePeriod;
 	}
 
-	/**
-	 * @return MultiWorldTagManager
-	 */
 	public function getTagManager(): MultiWorldTagManager {
 		return $this->tagManager;
 	}
@@ -117,21 +92,14 @@ class TagFactory {
 		$this->getPlugin()->getLogger()->info(TextFormat::YELLOW . "Successfully loaded $count tags!");
 	}
 
-	/**
-	 * @param Tag $tag
-	 * @param bool $force
-	 */
 	public function register(Tag $tag, bool $force = false): void {
-		if(array_key_exists($tag->getName(), $this->tags) && !$force) {
+		if(isset($this->tags[$tag->getName()]) && !$force) {
 			$this->getPlugin()->getLogger()->error(TextFormat::RED . "Attempted to register tag that's already been registered: {$tag->getName()}");
 			return;
 		}
 		$this->tags[$tag->getName()] = $tag;
 	}
 
-	/**
-	 * @param TagGroup $group
-	 */
 	public function registerGroup(TagGroup $group): void {
 		$tags = $group->load($this);
 		if(count($tags) > 0) {
@@ -146,18 +114,11 @@ class TagFactory {
 		return $this->tags;
 	}
 
-	/**
-	 * @param string $input
-	 */
 	public function replaceVisuals(string &$input): void {
 		$input = str_replace($this->getColorCharacter(), TextFormat::ESCAPE, $input);
 		$input = str_ireplace("{line}", "\n", $input);
 	}
 
-	/**
-	 * @param Player $player
-	 * @return string
-	 */
 	public function replace(Player $player): string {
 		if(strlen($this->tag) <= 0) {
 			return "";
