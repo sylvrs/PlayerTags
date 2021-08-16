@@ -31,7 +31,7 @@ class PlayerSession {
 	private int $inputMode;
 	private int $os;
 
-	/** @var int[] */
+	/** @var float[] */
 	private array $clicks = [];
 	private float $clicksPerSecond = 0.0;
 	private ClosureTask $clickUpdateTask;
