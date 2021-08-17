@@ -58,8 +58,7 @@ class DefaultTagGroup extends TagGroup {
 				return (string) $player->getPing();
 			}),
 			new Tag("cps", function (Player $player): string {
-				$session = $this->getPlugin()->getSessionManager()->find($player);
-				return (string) ($session !== null ? $session->getClicksPerSecond() : 0);
+				return (string) $this->getPlugin()->getSessionManager()->fetch($player)->getClicksPerSecond();
 			}),
 			new Tag("health", function (Player $player): string {
 				return (string) round($player->getHealth(), 2);
@@ -78,16 +77,13 @@ class DefaultTagGroup extends TagGroup {
 				return $color . ($player->getHealth() < $player->getMaxHealth() ? (substr_replace($healthString, TextFormat::RED, (int) $player->getHealth() - 1, 0)) : $healthString) . ($player->getAbsorption() > 0 ? TextFormat::GOLD . str_repeat("|", (int) $player->getAbsorption()) : "");
 			}),
 			new Tag("device", function (Player $player): string {
-				$session = $this->getPlugin()->getSessionManager()->find($player);
-				return $session !== null ? $session->getDevice() : "";
+				return $this->getPlugin()->getSessionManager()->fetch($player)->getDevice();
 			}),
 			new Tag("input_mode", function (Player $player): string{
-				$session = $this->getPlugin()->getSessionManager()->find($player);
-				return $session !== null ? $session->getInputModeString() : "";
+				return $this->getPlugin()->getSessionManager()->fetch($player)->getInputModeString();
 			}),
 			new Tag("os", function (Player $player): string {
-				$session = $this->getPlugin()->getSessionManager()->find($player);
-				return $session !== null ? $session->getOSString() : "";
+				return $this->getPlugin()->getSessionManager()->fetch($player)->getOSString();
 			})
 		];
 	}
