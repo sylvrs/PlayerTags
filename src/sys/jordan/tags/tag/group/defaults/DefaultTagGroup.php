@@ -20,7 +20,7 @@ class DefaultTagGroup extends TagGroup {
 
 	/**
 	 * @param TagFactory $factory
-	 * @return array
+	 * @return Tag[]
 	 */
 	public function load(TagFactory $factory): array {
 		return [
