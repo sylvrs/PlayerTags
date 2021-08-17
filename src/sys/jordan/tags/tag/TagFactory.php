@@ -98,7 +98,7 @@ class TagFactory {
 	}
 
 	public function register(Tag $tag, bool $force = false): void {
-		if(array_key_exists($tag->getName(), $this->tags) && !$force) {
+		if(isset($this->tags[$tag->getName()]) && !$force) {
 			$this->getPlugin()->getLogger()->error(TextFormat::RED . "Attempted to register tag that's already been registered: {$tag->getName()}");
 			return;
 		}
