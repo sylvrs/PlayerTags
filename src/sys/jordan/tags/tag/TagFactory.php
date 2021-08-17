@@ -24,7 +24,6 @@ use sys\jordan\tags\utils\PlayerTagsBaseTrait;
 use pocketmine\Player;
 use pocketmine\utils\TextFormat;
 
-use function array_key_exists;
 use function count;
 use function str_ireplace;
 use function str_replace;
