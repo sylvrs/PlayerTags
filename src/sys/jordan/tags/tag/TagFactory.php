@@ -53,9 +53,10 @@ class TagFactory {
 
 	public function enable(): void {
 		if(strlen($this->getTagString()) > 0) {
-			$this->getPlugin()->getScheduler()->scheduleRepeatingTask(new ClosureTask(function (int $currentTick): void {
-				$this->update();
-			}), $this->getUpdatePeriod());
+			$this->getPlugin()->getScheduler()->scheduleRepeatingTask(
+				new ClosureTask(Closure::fromCallable([$this, "update"])),
+				$this->getUpdatePeriod()
+			);
 		}
 	}
 
