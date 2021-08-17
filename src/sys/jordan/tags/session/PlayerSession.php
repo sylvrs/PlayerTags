@@ -17,14 +17,13 @@ use function array_shift;
 use function count;
 use function microtime;
 
-class PlayerSession {
+final class PlayerSession {
 
 	/** @var int */
 	public const MAX_CPS = 50;
 	/** @var int */
 	public const UPDATE_PERIOD = 5;
 
-	private UUID $uuid;
 	private Player $player;
 
 	private string $device;
@@ -36,34 +35,29 @@ class PlayerSession {
 	private float $clicksPerSecond = 0.0;
 	private ClosureTask $clickUpdateTask;
 
-	public function __construct(UUID $uuid) {
-		$this->uuid = $uuid;
-		$this->clickUpdateTask = new ClosureTask(function (int $currentTick): void {
-			$this->calculateClicksPerSecond();
-		});
-		PlayerTagsBase::getInstance()->getScheduler()->scheduleDelayedTask(new ClosureTask(function (int $currentTick): void {
-			$plugin = PlayerTagsBase::getInstance();
-			if(!isset($this->player) || !$this->player instanceof Player) {
-				$plugin->getSessionManager()->delete($this);
-				$plugin->getLogger()->debug("Deleting session due to inactivity");
-			}
-		}), 20 * 30);
+	public static function create(Player $player, SessionData $data): self {
+		return new PlayerSession($player, $data);
 	}
 
-	public function start(PlayerTagsBase $plugin): void {
-		$plugin->getScheduler()->scheduleRepeatingTask($this->getClickUpdateTask(), self::UPDATE_PERIOD);
-	}
+	public function __construct(Player $player, SessionData $data) {
+		$this->player = $player;
+		$this->device = $data->getDevice();
+		$this->inputMode = $data->getInputMode();
+		$this->os = $data->getOS();
 
-	public function getUUID(): UUID {
-		return $this->uuid;
+		PlayerTagsBase::getInstance()->getScheduler()->scheduleRepeatingTask(
+			$this->clickUpdateTask = new ClosureTask(function (int $currentTick): void {
+				if(count($this->clicks) <= 0) return;
+				$current = microtime(true);
+				// Count the number of clicks in that second by comparing the timestamps against the current time
+				$this->clicksPerSecond = count(array_filter($this->clicks, function (float $timestamp) use($current): bool { return ($current - $timestamp) <= 1; }));
+			}),
+			self::UPDATE_PERIOD
+		);
 	}
 
 	public function getPlayer(): Player {
 		return $this->player;
-	}
-
-	public function setPlayer(Player $player): void {
-		$this->player = $player;
 	}
 
 	public function getClicksPerSecond(): float {
@@ -79,37 +73,12 @@ class PlayerSession {
 		if(count($this->clicks) > self::MAX_CPS) array_shift($this->clicks);
 	}
 
-	public function clearClicks(): void {
-		$this->clicks = [];
-		$this->clicksPerSecond = 0;
-	}
-
-
-	public function calculateClicksPerSecond(): void {
-		if(count($this->clicks) <= 0) return;
-		$current = microtime(true);
-		// Count the number of clicks in that second by comparing the timestamps against the current time
-		$this->clicksPerSecond = count(array_filter($this->clicks, function (float $timestamp) use($current): bool { return ($current - $timestamp) <= 1; }));
-	}
-
-	public function getClickUpdateTask(): ClosureTask {
-		return $this->clickUpdateTask;
-	}
-
 	public function getDevice(): string {
 		return $this->device;
 	}
 
-	public function setDevice(string $device): void {
-		$this->device = $device;
-	}
-
 	public function getInputMode(): int {
 		return $this->inputMode;
-	}
-
-	public function setInputMode(int $inputMode): void {
-		$this->inputMode = $inputMode;
 	}
 
 	public function getInputModeString(): string {
@@ -168,11 +137,12 @@ class PlayerSession {
 		}
 	}
 
-	public function destroy(): void {
-		if($this->clickUpdateTask->getHandler() instanceof TaskHandler) {
-			$this->clickUpdateTask->getHandler()->cancel();
+	public function cancel(): void {
+		$handler = $this->clickUpdateTask->getHandler();
+		if($handler instanceof TaskHandler) {
+			$handler->cancel();
 		}
-		foreach($this as $key => $value) unset($this->$key);
+		unset($this->clickUpdateTask);
 	}
 
 }
