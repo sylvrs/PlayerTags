@@ -42,10 +42,6 @@ class TagFactory {
 
 	private MultiWorldTagManager $tagManager;
 
-	/**
-	 * TagFactory constructor.
-	 * @param PlayerTagsBase $plugin
-	 */
 	public function __construct(PlayerTagsBase $plugin) {
 		$this->setPlugin($plugin);
 		$this->tag = $plugin->getConfig()->get("tag", "");
@@ -73,23 +69,14 @@ class TagFactory {
 		return $this->tag;
 	}
 
-	/**
-	 * @return string
-	 */
 	public function getColorCharacter(): string {
 		return $this->colorCharacter;
 	}
 
-	/**
-	 * @return int
-	 */
 	public function getUpdatePeriod(): int {
 		return $this->updatePeriod;
 	}
 
-	/**
-	 * @return MultiWorldTagManager
-	 */
 	public function getTagManager(): MultiWorldTagManager {
 		return $this->tagManager;
 	}
@@ -110,10 +97,6 @@ class TagFactory {
 		$this->getPlugin()->getLogger()->info(TextFormat::YELLOW . "Successfully loaded $count tags!");
 	}
 
-	/**
-	 * @param Tag $tag
-	 * @param bool $force
-	 */
 	public function register(Tag $tag, bool $force = false): void {
 		if(array_key_exists($tag->getName(), $this->tags) && !$force) {
 			$this->getPlugin()->getLogger()->error(TextFormat::RED . "Attempted to register tag that's already been registered: {$tag->getName()}");
@@ -122,9 +105,6 @@ class TagFactory {
 		$this->tags[$tag->getName()] = $tag;
 	}
 
-	/**
-	 * @param TagGroup $group
-	 */
 	public function registerGroup(TagGroup $group): void {
 		$tags = $group->load($this);
 		if(count($tags) > 0) {
