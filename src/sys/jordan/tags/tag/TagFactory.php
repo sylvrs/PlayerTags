@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace sys\jordan\tags\tag;
 
+use Closure;
 use Exception;
 use pocketmine\scheduler\ClosureTask;
 use sys\jordan\tags\PlayerTagsBase;
@@ -132,9 +133,12 @@ class TagFactory {
 		return $output;
 	}
 
-	public function update(): void {
-		foreach($this->getPlugin()->getServer()->getOnlinePlayers() as $player) {
-			$player->setScoreTag($this->replace($player));
+	public function update(int $currentTick): void {
+		$players = array_filter($this->getPlugin()->getServer()->getLoggedInPlayers(), function(Player $player): bool {
+			return $this->getPlugin()->getSessionManager()->exists($player);
+		});
+		foreach($players as $player) {
+			$player->setScoreTag($this->createTag($player));
 		}
 	}
 
