@@ -144,14 +144,7 @@ class TagFactory {
 		$input = str_ireplace("{line}", "\n", $input);
 	}
 
-	/**
-	 * @param Player $player
-	 * @return string
-	 */
-	public function replace(Player $player): string {
-		if(strlen($this->tag) <= 0) {
-			return "";
-		}
+	public function createTag(Player $player): string {
 		$output = $this->getTagManager()->getTagForLevel($player);
 		foreach($this->getTags() as $tag) {
 			try {
