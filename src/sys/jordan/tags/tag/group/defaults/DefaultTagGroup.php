@@ -34,7 +34,7 @@ class DefaultTagGroup extends TagGroup {
 				return (string) $player->getFloorZ();
 			}),
 			new Tag("level", function (Player $player): string {
-				return $player->isValid() ? $player->getLevel()->getName() : "unknown";
+				return $player->isValid() ? $player->getLevel()->getName() : "Unknown";
 			}),
 			new Tag("item_id", function (Player $player): string {
 				return (string) $player->getInventory()->getItemInHand()->getId();
