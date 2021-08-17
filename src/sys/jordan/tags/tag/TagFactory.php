@@ -139,9 +139,6 @@ class TagFactory {
 		return $this->tags;
 	}
 
-	/**
-	 * @param string $input
-	 */
 	public function replaceVisuals(string &$input): void {
 		$input = str_replace($this->getColorCharacter(), TextFormat::ESCAPE, $input);
 		$input = str_ireplace("{line}", "\n", $input);
