@@ -52,9 +52,6 @@ class TagFactory {
 	}
 
 	public function enable(): void {
-		/*
-		 * Only start task if the tag string length > 0
-		 */
 		if(strlen($this->getTagString()) > 0) {
 			$this->getPlugin()->getScheduler()->scheduleRepeatingTask(new ClosureTask(function (int $currentTick): void {
 				$this->update();
