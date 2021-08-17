@@ -67,7 +67,7 @@ class DefaultTagGroup extends TagGroup {
 				return (string) $player->getMaxHealth();
 			}),
 			new Tag("health_bar", function (Player $player): string {
-				$healthString = str_repeat("|", (int) $player->getMaxHealth());
+				$healthString = str_repeat("|", $player->getMaxHealth());
 				$color = TextFormat::GREEN;
 				if($player->hasEffect(Effect::POISON)) {
 					$color = TextFormat::YELLOW;
