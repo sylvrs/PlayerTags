@@ -59,9 +59,6 @@ class TagFactory {
 		}
 	}
 
-	/**
-	 * @return string
-	 */
 	public function getTagString(): string {
 		return $this->tag;
 	}
