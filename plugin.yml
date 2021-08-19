@@ -1,5 +1,5 @@
 name: PlayerTags
-version: 1.2.0
+version: 1.2.1
 main: sys\jordan\tags\PlayerTagsBase
 api: 3.22.1
 mcpe-protocols: [448]
