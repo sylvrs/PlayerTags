@@ -1,7 +1,7 @@
 name: PlayerTags
 version: 1.2.1
 main: sys\jordan\tags\PlayerTagsBase
-api: 3.22.1
+api: 3.22.2
 mcpe-protocols: [448]
 author: sylvrs
 softdepend:
