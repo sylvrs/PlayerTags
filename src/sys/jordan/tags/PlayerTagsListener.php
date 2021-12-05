@@ -12,6 +12,7 @@ use pocketmine\event\server\DataPacketReceiveEvent;
 use pocketmine\network\mcpe\protocol\InventoryTransactionPacket;
 use pocketmine\network\mcpe\protocol\LevelSoundEventPacket;
 use pocketmine\network\mcpe\protocol\types\inventory\UseItemOnEntityTransactionData;
+use pocketmine\network\mcpe\protocol\types\LevelSoundEvent;
 use pocketmine\player\Player;
 use sys\jordan\tags\utils\PlayerTagsBaseTrait;
 
@@ -58,10 +59,8 @@ class PlayerTagsListener implements Listener {
 			$session = $this->getPlugin()->getSessionManager()->get($player);
 			if($packet instanceof InventoryTransactionPacket && $packet->trData instanceof UseItemOnEntityTransactionData) {
 				$session->addClick();
-			} elseif($packet instanceof LevelSoundEventPacket) {
-				if($packet->sound === LevelSoundEventPacket::SOUND_ATTACK_NODAMAGE) {
-					$session->addClick();
-				}
+			} else if($packet instanceof LevelSoundEventPacket && $packet->sound === LevelSoundEvent::ATTACK_NODAMAGE) {
+				$session->addClick();
 			}
 		}
 	}
