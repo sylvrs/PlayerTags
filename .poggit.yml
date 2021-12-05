@@ -2,7 +2,6 @@
 build-by-default: true
 branches:
   - master
-  - feature/pm-4
 projects:
   PlayerTags:
     path: ""
