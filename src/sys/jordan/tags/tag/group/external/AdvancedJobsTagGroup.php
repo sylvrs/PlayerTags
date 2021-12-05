@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace sys\jordan\tags\tag\group\defaults;
+namespace sys\jordan\tags\tag\group\external;
 
 
 use pocketmine\player\Player;
@@ -29,14 +29,14 @@ class AdvancedJobsTagGroup extends PluginTagGroup {
 	 */
 	public function register(TagFactory $factory): array {
 		return [
-			new ExternalPluginTag("job", $this->getExternalPlugin(), function (Player $player, Plugin $plugin): string {
+			new ExternalPluginTag("job", $this->externalPlugin, function (Player $player, Plugin $plugin): string {
 				return $plugin->hasJob($player) ? $plugin->getJob($player) : "Unemployed";
 			}),
-			new ExternalPluginTag("job_information", $this->getExternalPlugin(), function (Player $player, Plugin $plugin): string {
+			new ExternalPluginTag("job_information", $this->externalPlugin, function (Player $player, Plugin $plugin): string {
 				return $plugin->hasJob($player) ? $plugin->getJobInformation($player) : "";
 			}),
-			new ExternalPluginTag("job_progress", $this->getExternalPlugin(), function (Player $player, Plugin $plugin): string {
-				return $plugin->hasJob($player) ? $plugin->getProgress($player) : "-1";
+			new ExternalPluginTag("job_progress", $this->externalPlugin, function (Player $player, Plugin $plugin): string {
+				return $plugin->hasJob($player) ? (string) $plugin->getProgress($player) : "-1";
 			})
 		];
 	}

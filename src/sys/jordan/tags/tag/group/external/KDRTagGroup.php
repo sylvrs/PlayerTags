@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace sys\jordan\tags\tag\group\defaults;
+namespace sys\jordan\tags\tag\group\external;
 
 
 use pocketmine\player\Player;

@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace sys\jordan\tags\tag\group\defaults;
+namespace sys\jordan\tags\tag\group\external;
 
 
-use pocketmine\player\Player;
 use sys\jordan\tags\PlayerTagsBase;
 use sys\jordan\tags\tag\ExternalPluginTag;
 use sys\jordan\tags\tag\group\PluginTagGroup;
 use sys\jordan\tags\tag\TagFactory;
+use pocketmine\player\Player;
 use pocketmine\plugin\Plugin;
 
-class CombatLoggerTagGroup extends PluginTagGroup {
+class RankUpTagGroup extends PluginTagGroup {
 
 	public function __construct(PlayerTagsBase $plugin) {
-		parent::__construct($plugin, "CombatLogger");
+		parent::__construct($plugin, "RankUp");
 	}
 
 	/**
@@ -25,8 +25,8 @@ class CombatLoggerTagGroup extends PluginTagGroup {
 	 */
 	public function register(TagFactory $factory): array {
 		return [
-			new ExternalPluginTag("timer", $this->getExternalPlugin(), function (Player $player, Plugin $plugin): string {
-				return (string) $plugin->getTagDuration($player) ?? "";
+			new ExternalPluginTag("rankup", $this->getExternalPlugin(), function (Player $player, Plugin $plugin): string {
+				return ($group = $plugin->getPermManager()->getGroup($player)) !== false ? $group : "N/A";
 			})
 		];
 	}
