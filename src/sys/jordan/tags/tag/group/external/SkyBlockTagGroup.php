@@ -1,10 +1,15 @@
 <?php
 
+/**
+ * @noinspection PhpUndefinedNamespaceInspection
+ * @noinspection PhpUndefinedMethodInspection
+ * @noinspection PhpUndefinedClassInspection
+ */
+declare(strict_types=1);
 
-namespace sys\jordan\tags\tag\group\defaults;
+namespace sys\jordan\tags\tag\group\external;
 
-
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\plugin\Plugin;
 use room17\SkyBlock\island\RankIds;
 use sys\jordan\tags\PlayerTagsBase;
@@ -14,10 +19,6 @@ use sys\jordan\tags\tag\TagFactory;
 
 class SkyBlockTagGroup extends PluginTagGroup {
 
-	/**
-	 * SkyBlockTagGroup constructor.
-	 * @param PlayerTagsBase $plugin
-	 */
 	public function __construct(PlayerTagsBase $plugin) {
 		parent::__construct($plugin, "SkyBlock");
 	}
@@ -25,7 +26,6 @@ class SkyBlockTagGroup extends PluginTagGroup {
 	/**
 	 * @param TagFactory $factory
 	 * @return ExternalPluginTag[]
-	 * @noinspection PhpUndefinedClassInspection
 	 */
 	public function register(TagFactory $factory): array {
 		return [
@@ -34,18 +34,13 @@ class SkyBlockTagGroup extends PluginTagGroup {
 				return $session->hasIsland() ? $session->getIsland()->getCategory() : "N/A";
 			}),
 			new ExternalPluginTag("island_rank", $this->getExternalPlugin(), function (Player $player, Plugin $plugin): string {
-				switch($plugin->getSessionManager()->getSession($player)->getRank()) {
-					case RankIds::MEMBER:
-						return "Member";
-					case RankIds::OFFICER:
-						return "Officer";
-					case RankIds::LEADER:
-						return "Leader";
-					case RankIds::FOUNDER:
-						return "Founder";
-					default:
-						return "Unknown";
-				}
+				return match ($plugin->getSessionManager()->getSession($player)->getRank()) {
+					RankIds::MEMBER => "Member",
+					RankIds::OFFICER => "Officer",
+					RankIds::LEADER => "Leader",
+					RankIds::FOUNDER => "Founder",
+					default => "Unknown",
+				};
 			}),
 			new ExternalPluginTag("island_type", $this->getExternalPlugin(), function (Player $player, Plugin $plugin): string {
 				$session = $plugin->getSessionManager()->getSession($player);

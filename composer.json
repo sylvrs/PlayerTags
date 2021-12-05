@@ -1,0 +1,23 @@
+{
+  "name": "sylvrs/player-tags",
+  "description": "A small plugin for pocketmine/pocketmine-mp that allows for control over score tags",
+  "minimum-stability": "dev",
+  "license": "GPL-3.0",
+  "authors": [
+    {
+      "name": "Matthew Jordan",
+      "email": "matt@valiantnetwork.xyz"
+    }
+  ],
+  "scripts": {
+    "analyze": "./vendor/bin/phpstan analyze --no-progress",
+    "generate-baseline": "./vendor/bin/phpstan analyze --generate-baseline"
+  },
+  "require": {
+    "php": "^8.0"
+  },
+  "require-dev": {
+    "phpstan/phpstan": "0.12.94",
+    "pocketmine/pocketmine-mp": "dev-master"
+  }
+}
