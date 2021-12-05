@@ -10,7 +10,6 @@ use sys\jordan\tags\PlayerTagsBase;
 use sys\jordan\tags\utils\PlayerTagsBaseTrait;
 
 class SessionManager {
-
 	use PlayerTagsBaseTrait;
 
 	/** @var PlayerSession[] */
