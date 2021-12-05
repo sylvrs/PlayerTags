@@ -13,7 +13,7 @@ use pocketmine\utils\TextFormat;
 
 abstract class PluginTagGroup extends TagGroup {
 
-	private ?Plugin $externalPlugin;
+	protected ?Plugin $externalPlugin;
 
 	public function __construct(PlayerTagsBase $plugin, string $pluginName) {
 		parent::__construct($plugin);
