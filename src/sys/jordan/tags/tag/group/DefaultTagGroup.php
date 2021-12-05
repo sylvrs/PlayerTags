@@ -2,14 +2,13 @@
 
 declare(strict_types=1);
 
-namespace sys\jordan\tags\tag\group\defaults;
+namespace sys\jordan\tags\tag\group;
 
 
 use pocketmine\entity\effect\VanillaEffects;
 use pocketmine\item\Durable;
 use pocketmine\player\Player;
 use pocketmine\utils\TextFormat;
-use sys\jordan\tags\tag\group\TagGroup;
 use sys\jordan\tags\tag\Tag;
 use sys\jordan\tags\tag\TagFactory;
 use function round;
