@@ -11,7 +11,6 @@ use sys\jordan\tags\tag\TagFactory;
 use sys\jordan\tags\utils\PlayerTagsBaseTrait;
 
 abstract class TagGroup {
-
 	use PlayerTagsBaseTrait;
 
 	/**
