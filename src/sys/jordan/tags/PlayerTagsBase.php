@@ -16,6 +16,7 @@ class PlayerTagsBase extends PluginBase implements Listener {
 	private static self $instance;
 
 	public function onLoad(): void {
+		$this->getLogger()->warning("PlayerTags for API 3.0 is no longer actively supported. Please consider upgrading your server to the latest PocketMine version with the latest PlayerTags release.");
 		self::$instance = $this;
 		$this->saveDefaultConfig();
 		$this->sessionManager = new SessionManager($this);
