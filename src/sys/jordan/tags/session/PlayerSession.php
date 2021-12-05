@@ -31,7 +31,7 @@ class PlayerSession {
 	private int $inputMode;
 	private int $os;
 
-	/** @var int[] */
+	/** @var float[] */
 	private array $clicks = [];
 	private float $clicksPerSecond = 0.0;
 	private ClosureTask $clickUpdateTask;
@@ -105,7 +105,7 @@ class PlayerSession {
 		if(count($this->clicks) <= 0) return;
 		$current = microtime(true);
 		// Count the number of clicks in that second by comparing the timestamps against the current time
-		$this->clicksPerSecond = count(array_filter($this->clicks, function (float $timestamp) use($current): bool { return ($current - $timestamp) <= 1; }));
+		$this->clicksPerSecond = count(array_filter($this->clicks, static fn (float $timestamp): bool => ($current - $timestamp) <= 1));
 	}
 
 	public function getDevice(): string {
@@ -162,8 +162,7 @@ class PlayerSession {
 	}
 
 	public function destroy(): void {
-		$this->clickUpdateTask?->getHandler()->cancel();
-		foreach($this as $key => $value) unset($this->$key);
+		$this->clickUpdateTask->getHandler()?->cancel();
 	}
 
 }
