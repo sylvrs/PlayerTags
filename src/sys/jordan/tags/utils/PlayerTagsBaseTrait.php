@@ -9,19 +9,12 @@ use sys\jordan\tags\PlayerTagsBase;
 
 trait PlayerTagsBaseTrait {
 
-	/** @var PlayerTagsBase */
-	private $plugin;
+	private PlayerTagsBase $plugin;
 
-	/**
-	 * @return PlayerTagsBase
-	 */
 	public function getPlugin(): PlayerTagsBase {
 		return $this->plugin;
 	}
 
-	/**
-	 * @param PlayerTagsBase $plugin
-	 */
 	public function setPlugin(PlayerTagsBase $plugin): void {
 		$this->plugin = $plugin;
 	}
