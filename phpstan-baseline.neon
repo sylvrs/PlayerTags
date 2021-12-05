@@ -1,0 +1,112 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Call to an undefined method pocketmine\\\\plugin\\\\Plugin\\:\\:getJob\\(\\)\\.$#"
+			count: 1
+			path: src/sys/jordan/tags/tag/group/external/AdvancedJobsTagGroup.php
+
+		-
+			message: "#^Call to an undefined method pocketmine\\\\plugin\\\\Plugin\\:\\:getJobInformation\\(\\)\\.$#"
+			count: 1
+			path: src/sys/jordan/tags/tag/group/external/AdvancedJobsTagGroup.php
+
+		-
+			message: "#^Call to an undefined method pocketmine\\\\plugin\\\\Plugin\\:\\:getProgress\\(\\)\\.$#"
+			count: 1
+			path: src/sys/jordan/tags/tag/group/external/AdvancedJobsTagGroup.php
+
+		-
+			message: "#^Call to an undefined method pocketmine\\\\plugin\\\\Plugin\\:\\:hasJob\\(\\)\\.$#"
+			count: 3
+			path: src/sys/jordan/tags/tag/group/external/AdvancedJobsTagGroup.php
+
+		-
+			message: "#^Call to an undefined method pocketmine\\\\plugin\\\\Plugin\\:\\:getTagDuration\\(\\)\\.$#"
+			count: 1
+			path: src/sys/jordan/tags/tag/group/external/CombatLoggerTagGroup.php
+
+		-
+			message: "#^Call to an undefined method pocketmine\\\\plugin\\\\Plugin\\:\\:getMonetaryUnit\\(\\)\\.$#"
+			count: 1
+			path: src/sys/jordan/tags/tag/group/external/EconomyAPITagGroup.php
+
+		-
+			message: "#^Call to an undefined method pocketmine\\\\plugin\\\\Plugin\\:\\:myMoney\\(\\)\\.$#"
+			count: 1
+			path: src/sys/jordan/tags/tag/group/external/EconomyAPITagGroup.php
+
+		-
+			message: "#^Call to an undefined method pocketmine\\\\plugin\\\\Plugin\\:\\:getFactionPower\\(\\)\\.$#"
+			count: 1
+			path: src/sys/jordan/tags/tag/group/external/FactionsProTagGroup.php
+
+		-
+			message: "#^Call to an undefined method pocketmine\\\\plugin\\\\Plugin\\:\\:getPlayerFaction\\(\\)\\.$#"
+			count: 2
+			path: src/sys/jordan/tags/tag/group/external/FactionsProTagGroup.php
+
+		-
+			message: "#^Call to an undefined method pocketmine\\\\plugin\\\\Plugin\\:\\:getProvider\\(\\)\\.$#"
+			count: 6
+			path: src/sys/jordan/tags/tag/group/external/KDRTagGroup.php
+
+		-
+			message: "#^Call to an undefined method pocketmine\\\\plugin\\\\Plugin\\:\\:getPlayerManager\\(\\)\\.$#"
+			count: 3
+			path: src/sys/jordan/tags/tag/group/external/PiggyFactionsTagGroup.php
+
+		-
+			message: "#^Call to an undefined method pocketmine\\\\plugin\\\\Plugin\\:\\:getUserDataMgr\\(\\)\\.$#"
+			count: 3
+			path: src/sys/jordan/tags/tag/group/external/PurePermsTagGroup.php
+
+		-
+			message: "#^Call to an undefined method pocketmine\\\\plugin\\\\Plugin\\:\\:getPermManager\\(\\)\\.$#"
+			count: 1
+			path: src/sys/jordan/tags/tag/group/external/RankUpTagGroup.php
+
+		-
+			message: "#^Call to an undefined method pocketmine\\\\player\\\\Player\\:\\:getLowerCaseName\\(\\)\\.$#"
+			count: 1
+			path: src/sys/jordan/tags/tag/group/external/RedSkyBlockTagGroup.php
+
+		-
+			message: "#^Call to an undefined method pocketmine\\\\plugin\\\\Plugin\\:\\:calcRank\\(\\)\\.$#"
+			count: 1
+			path: src/sys/jordan/tags/tag/group/external/RedSkyBlockTagGroup.php
+
+		-
+			message: "#^Call to an undefined method pocketmine\\\\plugin\\\\Plugin\\:\\:getIslandName\\(\\)\\.$#"
+			count: 1
+			path: src/sys/jordan/tags/tag/group/external/RedSkyBlockTagGroup.php
+
+		-
+			message: "#^Call to an undefined method pocketmine\\\\plugin\\\\Plugin\\:\\:getValue\\(\\)\\.$#"
+			count: 1
+			path: src/sys/jordan/tags/tag/group/external/RedSkyBlockTagGroup.php
+
+		-
+			message: "#^Access to constant FOUNDER on an unknown class room17\\\\SkyBlock\\\\island\\\\RankIds\\.$#"
+			count: 1
+			path: src/sys/jordan/tags/tag/group/external/SkyBlockTagGroup.php
+
+		-
+			message: "#^Access to constant LEADER on an unknown class room17\\\\SkyBlock\\\\island\\\\RankIds\\.$#"
+			count: 1
+			path: src/sys/jordan/tags/tag/group/external/SkyBlockTagGroup.php
+
+		-
+			message: "#^Access to constant MEMBER on an unknown class room17\\\\SkyBlock\\\\island\\\\RankIds\\.$#"
+			count: 1
+			path: src/sys/jordan/tags/tag/group/external/SkyBlockTagGroup.php
+
+		-
+			message: "#^Access to constant OFFICER on an unknown class room17\\\\SkyBlock\\\\island\\\\RankIds\\.$#"
+			count: 1
+			path: src/sys/jordan/tags/tag/group/external/SkyBlockTagGroup.php
+
+		-
+			message: "#^Call to an undefined method pocketmine\\\\plugin\\\\Plugin\\:\\:getSessionManager\\(\\)\\.$#"
+			count: 3
+			path: src/sys/jordan/tags/tag/group/external/SkyBlockTagGroup.php
+
