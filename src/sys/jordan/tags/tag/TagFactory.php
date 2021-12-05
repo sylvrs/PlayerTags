@@ -8,17 +8,17 @@ use Exception;
 use pocketmine\player\Player;
 use pocketmine\scheduler\ClosureTask;
 use sys\jordan\tags\PlayerTagsBase;
-use sys\jordan\tags\tag\group\defaults\AdvancedJobsTagGroup;
-use sys\jordan\tags\tag\group\defaults\CombatLoggerTagGroup;
-use sys\jordan\tags\tag\group\defaults\DefaultTagGroup;
-use sys\jordan\tags\tag\group\defaults\EconomyAPITagGroup;
-use sys\jordan\tags\tag\group\defaults\FactionsProTagGroup;
-use sys\jordan\tags\tag\group\defaults\KDRTagGroup;
-use sys\jordan\tags\tag\group\defaults\PiggyFactionsTagGroup;
-use sys\jordan\tags\tag\group\defaults\PurePermsTagGroup;
-use sys\jordan\tags\tag\group\defaults\RankUpTagGroup;
-use sys\jordan\tags\tag\group\defaults\RedSkyBlockTagGroup;
-use sys\jordan\tags\tag\group\defaults\SkyBlockTagGroup;
+use sys\jordan\tags\tag\group\DefaultTagGroup;
+use sys\jordan\tags\tag\group\external\AdvancedJobsTagGroup;
+use sys\jordan\tags\tag\group\external\CombatLoggerTagGroup;
+use sys\jordan\tags\tag\group\external\EconomyAPITagGroup;
+use sys\jordan\tags\tag\group\external\FactionsProTagGroup;
+use sys\jordan\tags\tag\group\external\KDRTagGroup;
+use sys\jordan\tags\tag\group\external\PiggyFactionsTagGroup;
+use sys\jordan\tags\tag\group\external\PurePermsTagGroup;
+use sys\jordan\tags\tag\group\external\RankUpTagGroup;
+use sys\jordan\tags\tag\group\external\RedSkyBlockTagGroup;
+use sys\jordan\tags\tag\group\external\SkyBlockTagGroup;
 use sys\jordan\tags\tag\group\TagGroup;
 use sys\jordan\tags\utils\PlayerTagsBaseTrait;
 use pocketmine\utils\TextFormat;
@@ -77,9 +77,10 @@ class TagFactory {
 	}
 
 	public function registerTags(): void {
+		$this->registerGroup(new DefaultTagGroup($this->getPlugin()));
+
 		$this->registerGroup(new AdvancedJobsTagGroup($this->getPlugin()));
 		$this->registerGroup(new CombatLoggerTagGroup($this->getPlugin()));
-		$this->registerGroup(new DefaultTagGroup($this->getPlugin()));
 		$this->registerGroup(new EconomyAPITagGroup($this->getPlugin()));
 		$this->registerGroup(new FactionsProTagGroup($this->getPlugin()));
 		$this->registerGroup(new KDRTagGroup($this->getPlugin()));
