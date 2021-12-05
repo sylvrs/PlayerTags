@@ -4,24 +4,23 @@ declare(strict_types=1);
 
 namespace sys\jordan\tags\tag;
 
-use Closure;
 use Exception;
+use pocketmine\player\Player;
 use pocketmine\scheduler\ClosureTask;
 use sys\jordan\tags\PlayerTagsBase;
-use sys\jordan\tags\tag\group\defaults\AdvancedJobsTagGroup;
-use sys\jordan\tags\tag\group\defaults\CombatLoggerTagGroup;
-use sys\jordan\tags\tag\group\defaults\DefaultTagGroup;
-use sys\jordan\tags\tag\group\defaults\EconomyAPITagGroup;
-use sys\jordan\tags\tag\group\defaults\FactionsProTagGroup;
-use sys\jordan\tags\tag\group\defaults\KDRTagGroup;
-use sys\jordan\tags\tag\group\defaults\PiggyFactionsTagGroup;
-use sys\jordan\tags\tag\group\defaults\PurePermsTagGroup;
-use sys\jordan\tags\tag\group\defaults\RankUpTagGroup;
-use sys\jordan\tags\tag\group\defaults\RedSkyBlockTagGroup;
-use sys\jordan\tags\tag\group\defaults\SkyBlockTagGroup;
+use sys\jordan\tags\tag\group\DefaultTagGroup;
+use sys\jordan\tags\tag\group\external\AdvancedJobsTagGroup;
+use sys\jordan\tags\tag\group\external\CombatLoggerTagGroup;
+use sys\jordan\tags\tag\group\external\EconomyAPITagGroup;
+use sys\jordan\tags\tag\group\external\FactionsProTagGroup;
+use sys\jordan\tags\tag\group\external\KDRTagGroup;
+use sys\jordan\tags\tag\group\external\PiggyFactionsTagGroup;
+use sys\jordan\tags\tag\group\external\PurePermsTagGroup;
+use sys\jordan\tags\tag\group\external\RankUpTagGroup;
+use sys\jordan\tags\tag\group\external\RedSkyBlockTagGroup;
+use sys\jordan\tags\tag\group\external\SkyBlockTagGroup;
 use sys\jordan\tags\tag\group\TagGroup;
 use sys\jordan\tags\utils\PlayerTagsBaseTrait;
-use pocketmine\Player;
 use pocketmine\utils\TextFormat;
 
 use function count;
@@ -35,12 +34,14 @@ class TagFactory {
 
 	/** @var Tag[] */
 	private array $tags = [];
-	private string $tag;
 
+	private string $tag;
 	private string $colorCharacter;
+
 	private int $updatePeriod;
 
 	private MultiWorldTagManager $tagManager;
+
 
 	public function __construct(PlayerTagsBase $plugin) {
 		$this->setPlugin($plugin);
@@ -53,10 +54,9 @@ class TagFactory {
 
 	public function enable(): void {
 		if(strlen($this->getTagString()) > 0) {
-			$this->getPlugin()->getScheduler()->scheduleRepeatingTask(
-				new ClosureTask(Closure::fromCallable([$this, "update"])),
-				$this->getUpdatePeriod()
-			);
+			$this->getPlugin()->getScheduler()->scheduleRepeatingTask(new ClosureTask(function (): void {
+				$this->update();
+			}), $this->getUpdatePeriod());
 		}
 	}
 
@@ -77,9 +77,10 @@ class TagFactory {
 	}
 
 	public function registerTags(): void {
+		$this->registerGroup(new DefaultTagGroup($this->getPlugin()));
+
 		$this->registerGroup(new AdvancedJobsTagGroup($this->getPlugin()));
 		$this->registerGroup(new CombatLoggerTagGroup($this->getPlugin()));
-		$this->registerGroup(new DefaultTagGroup($this->getPlugin()));
 		$this->registerGroup(new EconomyAPITagGroup($this->getPlugin()));
 		$this->registerGroup(new FactionsProTagGroup($this->getPlugin()));
 		$this->registerGroup(new KDRTagGroup($this->getPlugin()));
@@ -119,8 +120,11 @@ class TagFactory {
 		$input = str_ireplace("{line}", "\n", $input);
 	}
 
-	public function createTag(Player $player): string {
-		$output = $this->getTagManager()->getTagForLevel($player);
+	public function replace(Player $player): string {
+		if(strlen($this->tag) <= 0) {
+			return "";
+		}
+		$output = $this->getTagManager()->getTagForWorld($player);
 		foreach($this->getTags() as $tag) {
 			try {
 				$tag->replace($player, $output);
@@ -133,12 +137,10 @@ class TagFactory {
 		return $output;
 	}
 
-	public function update(int $currentTick): void {
-		$players = array_filter($this->getPlugin()->getServer()->getLoggedInPlayers(), function(Player $player): bool {
-			return $this->getPlugin()->getSessionManager()->exists($player);
-		});
+	public function update(): void {
+		$players = array_filter($this->getPlugin()->getServer()->getOnlinePlayers(), static fn(Player $player): bool => $player->isOnline() && $player->spawned);
 		foreach($players as $player) {
-			$player->setScoreTag($this->createTag($player));
+			$player->setScoreTag($this->replace($player));
 		}
 	}
 

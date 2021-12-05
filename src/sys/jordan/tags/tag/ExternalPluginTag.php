@@ -4,15 +4,21 @@ declare(strict_types=1);
 
 namespace sys\jordan\tags\tag;
 
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\plugin\Plugin;
 use function str_ireplace;
 
 class ExternalPluginTag extends Tag {
 
-	private Plugin $plugin;
+	protected Plugin $plugin;
 
-	public function __construct(string $name, Plugin $externalPlugin, \Closure $replaceCallback) {
+	/**
+	 * ExternalPluginTag constructor.
+	 * @param string $name
+	 * @param Plugin $externalPlugin
+	 * @param callable $replaceCallback
+	 */
+	public function __construct(string $name, Plugin $externalPlugin, callable $replaceCallback) {
 		parent::__construct($name, $replaceCallback);
 		$this->plugin = $externalPlugin;
 	}
@@ -22,7 +28,7 @@ class ExternalPluginTag extends Tag {
 	}
 
 	public function replace(Player $player, string &$input): void {
-		$output = ($this->replaceCallback)($player, $this->getPlugin());
+		$output = ($this->replaceCallback)($player, $this->plugin);
 		if($output === null) return;
 		$input = str_ireplace("{{$this->getName()}}", $output, $input);
 	}

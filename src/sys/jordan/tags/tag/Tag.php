@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace sys\jordan\tags\tag;
 
-use pocketmine\Player;
+use Closure;
+use pocketmine\player\Player;
 use function str_ireplace;
 
-class Tag {
+class Tag implements ITag {
 
 	private string $name;
 
-	protected \Closure $replaceCallback;
+	protected Closure $replaceCallback;
 
-	public function __construct(string $name, \Closure $replaceCallback ) {
+	public function __construct(string $name, Closure $replaceCallback) {
 		$this->name = $name;
 		$this->replaceCallback = $replaceCallback;
 	}
