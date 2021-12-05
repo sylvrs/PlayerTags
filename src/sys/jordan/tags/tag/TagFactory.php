@@ -31,6 +31,11 @@ use function strlen;
 
 class TagFactory {
 
+	/** @var int */
+	public const CURRENT_TAG_VERSION = 2;
+
+	public static int $UPDATE_PERIOD = 10;
+
 	use PlayerTagsBaseTrait;
 
 	/** @var Tag[] */
@@ -38,15 +43,22 @@ class TagFactory {
 	private string $tag;
 
 	private string $colorCharacter;
-	private int $updatePeriod;
 
 	private MultiWorldTagManager $tagManager;
 
 	public function __construct(PlayerTagsBase $plugin) {
 		$this->setPlugin($plugin);
-		$this->tag = $plugin->getConfig()->get("tag", "");
+		$version = (int) $plugin->getConfig()->get("config-version", -1);
+		if($version < self::CURRENT_TAG_VERSION) {
+			$plugin->getLogger()->warning("Your configuration is out of date! Please ");
+		}
+		$tag = $plugin->getConfig()->get("tag", "");
+		if(is_array($tag)) {
+			$tag = implode("\n", $tag);
+		}
+		$this->tag = $tag;
 		$this->colorCharacter = $plugin->getConfig()->get("color-character", "&");
-		$this->updatePeriod = $plugin->getConfig()->get("update-period", 10);
+		self::$UPDATE_PERIOD = $plugin->getConfig()->get("update-period", 10);
 		$this->tagManager = new MultiWorldTagManager($this, $this->getPlugin()->getConfig());
 		$this->registerTags();
 	}
@@ -55,7 +67,7 @@ class TagFactory {
 		if(strlen($this->getTagString()) > 0) {
 			$this->getPlugin()->getScheduler()->scheduleRepeatingTask(
 				new ClosureTask(Closure::fromCallable([$this, "update"])),
-				$this->getUpdatePeriod()
+				self::$UPDATE_PERIOD
 			);
 		}
 	}
@@ -66,10 +78,6 @@ class TagFactory {
 
 	public function getColorCharacter(): string {
 		return $this->colorCharacter;
-	}
-
-	public function getUpdatePeriod(): int {
-		return $this->updatePeriod;
 	}
 
 	public function getTagManager(): MultiWorldTagManager {

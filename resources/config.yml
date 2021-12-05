@@ -1,9 +1,10 @@
 ---
 ##
-# For a list of supported tags, visit https://github.com/sylvrs/PlayerTags
+# For formatting and/or a list of supported tags, visit https://github.com/sylvrs/PlayerTags
 ##
-
-# The tag displayed below the player's name tag
+config-version: 2
+# The global tag displayed below the player's name tag
+# This tag will be disabled if multi-world.enabled is set to true
 tag: ""
 # The character used to replace Minecraft's color character (§)
 color-character: "&"
