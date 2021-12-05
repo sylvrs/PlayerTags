@@ -2,6 +2,7 @@ name: PlayerTags
 version: 2.0.0
 main: sys\jordan\tags\PlayerTagsBase
 api: 4.0.0
+mcpe-protocols: [475]
 author: sylvrs
 softdepend:
   - AdvancedJobs
