@@ -1,12 +1,12 @@
 <?php
 
+declare(strict_types=1);
 
 namespace sys\jordan\tags\tag;
 
 
 use pocketmine\Player;
 use pocketmine\utils\Config;
-use function array_key_exists;
 
 class MultiWorldTagManager {
 
@@ -18,7 +18,10 @@ class MultiWorldTagManager {
 	public function __construct(TagFactory $factory, Config $config) {
 		$this->factory = $factory;
 		$this->enabled = $config->getNested("multi-world.enabled", false);
-		$this->tags = $config->getNested("multi-world.worlds", []);
+		$this->tags = array_map(
+			function ($tag): string { return is_array($tag) ? implode("\n", $tag) : $tag; },
+			$config->getNested("multi-world.worlds", [])
+		);
 	}
 
 	public function isEnabled(): bool {
@@ -45,7 +48,9 @@ class MultiWorldTagManager {
 	}
 
 	public function getTagForLevel(Player $player): string {
-		return ($this->isEnabled() && $player->isValid() && $this->hasTag($player->getLevel()->getFolderName())) ? $this->getTag($player->getLevel()->getFolderName()) : $this->getFactory()->getTagString();
+		return ($this->isEnabled() && $player->isValid() && $this->hasTag($player->getLevel()->getFolderName())) ?
+			$this->getTag($player->getLevel()->getFolderName()) :
+			$this->getFactory()->getTagString();
 	}
 
 }
