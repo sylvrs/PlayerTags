@@ -21,8 +21,8 @@ final class PlayerSession {
 
 	/** @var int */
 	public const MAX_CPS = 50;
-	/** @var int */
-	public const UPDATE_PERIOD = 5;
+
+	public static int $UPDATE_PERIOD = 5;
 
 	private Player $player;
 
@@ -52,7 +52,7 @@ final class PlayerSession {
 				// Count the number of clicks in that second by comparing the timestamps against the current time
 				$this->clicksPerSecond = count(array_filter($this->clicks, function (float $timestamp) use($current): bool { return ($current - $timestamp) <= 1; }));
 			}),
-			self::UPDATE_PERIOD
+			self::$UPDATE_PERIOD
 		);
 	}
 
