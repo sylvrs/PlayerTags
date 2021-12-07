@@ -32,6 +32,11 @@ class PlayerTagsListener implements Listener {
 		$plugin->getLogger()->debug("Successfully enabled listener!");
 	}
 
+	/**
+	 * @param PlayerJoinEvent $event
+	 *
+	 * @priority LOWEST
+	 */
 	public function handleJoin(PlayerJoinEvent $event): void {
 		$player = $event->getPlayer();
 		$this->getPlugin()->getLogger()->debug("Starting player session for {$player->getName()}...");
