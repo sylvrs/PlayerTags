@@ -9,11 +9,14 @@ use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\event\player\PlayerQuitEvent;
 use pocketmine\event\server\DataPacketReceiveEvent;
+use pocketmine\inventory\ArmorInventory;
+use pocketmine\item\VanillaItems;
 use pocketmine\network\mcpe\protocol\InventoryTransactionPacket;
 use pocketmine\network\mcpe\protocol\LevelSoundEventPacket;
 use pocketmine\network\mcpe\protocol\types\inventory\UseItemOnEntityTransactionData;
 use pocketmine\network\mcpe\protocol\types\LevelSoundEvent;
 use pocketmine\player\Player;
+use pocketmine\scheduler\ClosureTask;
 use sys\jordan\tags\utils\PlayerTagsBaseTrait;
 
 class PlayerTagsListener implements Listener {
@@ -29,7 +32,7 @@ class PlayerTagsListener implements Listener {
 		$plugin->getLogger()->debug("Successfully enabled listener!");
 	}
 
-	public function handlePlayerJoin(PlayerJoinEvent $event): void {
+	public function handleJoin(PlayerJoinEvent $event): void {
 		$player = $event->getPlayer();
 		$this->getPlugin()->getLogger()->debug("Starting player session for {$player->getName()}...");
 		$session = $this->getPlugin()->getSessionManager()->get($player);
