@@ -65,9 +65,7 @@ class PlayerTagsListener implements Listener {
 		$player = $event->getOrigin()->getPlayer();
 		if($player instanceof Player && $player->isOnline()) {
 			$session = $this->getPlugin()->getSessionManager()->get($player);
-			if($packet instanceof InventoryTransactionPacket && $packet->trData instanceof UseItemOnEntityTransactionData) {
-				$session->addClick();
-			} else if($packet instanceof LevelSoundEventPacket && $packet->sound === LevelSoundEvent::ATTACK_NODAMAGE) {
+			if(($packet instanceof InventoryTransactionPacket && $packet->trData instanceof UseItemOnEntityTransactionData) || ($packet instanceof LevelSoundEventPacket && $packet->sound === LevelSoundEvent::ATTACK_NODAMAGE)) {
 				$session->addClick();
 			}
 		}
