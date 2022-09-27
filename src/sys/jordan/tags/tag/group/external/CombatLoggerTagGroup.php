@@ -25,7 +25,8 @@ class CombatLoggerTagGroup extends PluginTagGroup {
 	public function register(TagFactory $factory): array {
 		return [
 			new ExternalPluginTag("timer", $this->externalPlugin, function (Player $player, Plugin $plugin): string {
-				return ((string) $plugin->getTagDuration($player)) ?? "";
+				$tag = $plugin->getTag($player);
+				return (string) ($tag?->getExpiryTimestamp() - $tag?->getCreationTimestamp()) ?? "";
 			})
 		];
 	}
